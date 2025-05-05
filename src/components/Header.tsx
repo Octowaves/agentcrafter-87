@@ -5,6 +5,7 @@ import PrompterButton from './PrompterButton';
 import { Link } from 'react-router-dom';
 import AuthNav from './AuthNav';
 import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
