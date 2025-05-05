@@ -2,10 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import PrompterButton from './PrompterButton';
+import { Link } from 'react-router-dom';
+import AuthNav from './AuthNav';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user } = useAuth();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -32,10 +36,10 @@ const Header = () => {
       <div className="container px-4 mx-auto">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
-            <a href="#" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-prompter-600 rounded-lg flex items-center justify-center text-white font-bold">P</div>
               <span className="text-xl font-bold text-gray-900">Prompter</span>
-            </a>
+            </Link>
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
@@ -51,11 +55,15 @@ const Header = () => {
           </nav>
           
           <div className="hidden md:block">
-            <PrompterButton 
-              onClick={() => window.location.href = "#pricing"}
-            >
-              Start for $10/month
-            </PrompterButton>
+            {user ? (
+              <Link to="/dashboard">
+                <PrompterButton>
+                  Dashboard
+                </PrompterButton>
+              </Link>
+            ) : (
+              <AuthNav />
+            )}
           </div>
           
           <button 
@@ -85,14 +93,34 @@ const Header = () => {
                   {link.name}
                 </a>
               ))}
-              <PrompterButton 
-                onClick={() => {
-                  window.location.href = "#pricing";
-                  setMobileMenuOpen(false);
-                }}
-              >
-                Start for $10/month
-              </PrompterButton>
+              {user ? (
+                <Link 
+                  to="/dashboard" 
+                  className="w-full"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <PrompterButton>
+                    Dashboard
+                  </PrompterButton>
+                </Link>
+              ) : (
+                <div className="flex flex-col space-y-2">
+                  <Link 
+                    to="/sign-in" 
+                    className="w-full" 
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Button variant="outline" className="w-full">Sign In</Button>
+                  </Link>
+                  <Link 
+                    to="/sign-up" 
+                    className="w-full"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Button className="w-full">Get Started</Button>
+                  </Link>
+                </div>
+              )}
             </nav>
           </div>
         </div>
