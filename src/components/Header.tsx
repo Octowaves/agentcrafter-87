@@ -24,7 +24,6 @@ const Header = () => {
   const navLinks = [
     { name: 'Features', href: '#features' },
     { name: 'How It Works', href: '#how-it-works' },
-    { name: 'Pricing', href: '#pricing' },
     { name: 'FAQ', href: '#faq' },
   ];
   
@@ -38,8 +37,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-prompter-600 rounded-lg flex items-center justify-center text-white font-bold">P</div>
-              <span className="text-xl font-bold text-gray-900">Prompter</span>
+              <div className="w-8 h-8 bg-prompter-600 rounded-lg flex items-center justify-center text-white font-bold">A</div>
+              <span className="text-xl font-bold text-gray-900">Agentcrafter</span>
             </Link>
           </div>
           
@@ -118,7 +117,7 @@ const Header = () => {
                     className="w-full"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Button className="w-full">Get Started</Button>
+                    <Button className="w-full">Get Started Free</Button>
                   </Link>
                 </div>
               )}

@@ -14,7 +14,7 @@ import Footer from '@/components/Footer';
 const Index = () => {
   useEffect(() => {
     // Update document title
-    document.title = "Prompter | AI-Powered Prompt Engineering";
+    document.title = "Agentcrafter | AI-Powered Agentic Prompt Engineering";
     
     // Smooth scroll for anchor links
     const handleAnchorClick = (e: MouseEvent) => {

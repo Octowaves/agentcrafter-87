@@ -9,7 +9,7 @@ const AuthNav = () => {
         <Button variant="outline">Sign In</Button>
       </Link>
       <Link to="/sign-up">
-        <Button>Get Started</Button>
+        <Button>Get Started Free</Button>
       </Link>
     </div>
   );

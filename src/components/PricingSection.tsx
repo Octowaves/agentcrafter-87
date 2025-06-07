@@ -5,33 +5,33 @@ import PrompterButton from './PrompterButton';
 
 const PricingSection = () => {
   const features = [
-    "100 prompt generations/month",
+    "Unlimited prompt generations",
     "Save prompt history",
     "Export to any LLM platform",
-    "Email support",
-    "Cancel anytime"
+    "Community support",
+    "Always free"
   ];
 
   return (
     <section className="section-padding" id="pricing">
       <div className="container px-4 mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-          Simple, Transparent Pricing
+          Free Forever
         </h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Start creating expert AI prompts at our special early bird rate.
+          Start creating expert AI prompts completely free. No hidden costs, no subscriptions.
         </p>
         
         <div className="max-w-md mx-auto">
           <div className="bg-white rounded-2xl overflow-hidden border border-prompter-100 shadow-lg animate-fade-in">
             <div className="bg-prompter-600 text-white py-6 px-8 text-center">
               <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2">
-                LIMITED TIME OFFER
+                ALWAYS FREE
               </span>
-              <h3 className="text-2xl font-bold mb-1">Early Bird Plan</h3>
+              <h3 className="text-2xl font-bold mb-1">Free Plan</h3>
               <div className="flex items-center justify-center">
-                <span className="text-4xl font-bold">$10</span>
-                <span className="text-lg ml-1">/month</span>
+                <span className="text-4xl font-bold">$0</span>
+                <span className="text-lg ml-1">/forever</span>
               </div>
             </div>
             
@@ -47,12 +47,12 @@ const PricingSection = () => {
                 ))}
               </ul>
               
-              <PrompterButton size="lg" className="w-full">
-                Start for $10/month <ArrowRight className="ml-2 h-5 w-5" />
+              <PrompterButton size="lg" className="w-full" onClick={() => window.location.href = "/sign-up"}>
+                Start Free Now <ArrowRight className="ml-2 h-5 w-5" />
               </PrompterButton>
               
               <p className="text-center text-sm text-gray-500 mt-4">
-                Limited-time early bird pricing
+                No credit card required
               </p>
             </div>
           </div>

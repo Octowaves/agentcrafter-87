@@ -15,13 +15,13 @@ const SignIn = () => {
   
   return (
     <AuthLayout 
-      title="Welcome back" 
-      description="Sign in to your Prompter account"
+      title="Welcome back to Agentcrafter" 
+      description="Sign in to your account"
       footer={
         <div className="text-center mt-4">
           Don't have an account?{' '}
           <Link to="/sign-up" className="text-prompter-600 hover:underline font-medium">
-            Sign up
+            Sign up for free
           </Link>
         </div>
       }

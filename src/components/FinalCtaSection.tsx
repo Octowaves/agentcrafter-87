@@ -17,13 +17,13 @@ const FinalCtaSection = () => {
           <PrompterButton 
             className="bg-white text-prompter-700 hover:bg-gray-100"
             size="lg"
-            onClick={() => window.location.href = "#pricing"}
+            onClick={() => window.location.href = "/sign-up"}
           >
-            Start for $10/month <ArrowRight className="ml-2 h-5 w-5" />
+            Start Free Now <ArrowRight className="ml-2 h-5 w-5" />
           </PrompterButton>
         </div>
         <p className="text-sm opacity-75 animate-fade-in-delayed">
-          Built for builders. Powered by AI.
+          Built for builders. Powered by AI. Always free.
         </p>
       </div>
     </section>

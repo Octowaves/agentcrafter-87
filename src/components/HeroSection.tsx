@@ -10,20 +10,20 @@ const HeroSection = () => {
         <div className="pt-20 pb-16 md:pt-28 md:pb-24 flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 md:pr-12 mb-12 md:mb-0">
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 mb-6 animate-fade-in">
-              Struggling to Write Good AI Prompts? Let Prompter Do It for You.
+              Struggling to Write Agentic AI Prompts? Let Agentcrafter Do It for You.
             </h1>
             <p className="text-xl text-gray-600 mb-8 animate-fade-in-delayed">
-              Prompter is your AI sidekick that crafts perfect prompts for your agents in minutes — no guesswork, just results.
+              Agentcrafter is your AI sidekick that crafts perfect prompts for your agents in minutes — no guesswork, just results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delayed">
               <PrompterButton 
                 size="lg" 
-                onClick={() => window.location.href = "#pricing"}
+                onClick={() => window.location.href = "/sign-up"}
               >
-                Get Started for $10/month <ArrowRight className="ml-2 h-5 w-5" />
+                Start Free <ArrowRight className="ml-2 h-5 w-5" />
               </PrompterButton>
               <div className="text-sm text-gray-500 mt-2 sm:mt-4">
-                Early bird deal · 100 prompts/month · Cancel anytime
+                Completely free · No credit card required · Start crafting now
               </div>
             </div>
           </div>
@@ -35,7 +35,7 @@ const HeroSection = () => {
                   <div className="w-3 h-3 bg-red-400 rounded-full mr-2"></div>
                   <div className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
                   <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                  <div className="mx-auto text-sm text-gray-400">Prompter AI Assistant</div>
+                  <div className="mx-auto text-sm text-gray-400">Agentcrafter AI Assistant</div>
                 </div>
                 <div className="space-y-4">
                   <div className="bg-white p-3 rounded-lg shadow-sm">

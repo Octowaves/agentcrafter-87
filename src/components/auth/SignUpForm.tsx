@@ -49,10 +49,9 @@ const SignUpForm = () => {
       } else {
         toast({
           title: 'Sign up successful',
-          description: 'Welcome to Prompter! Please check your email to confirm your account.',
+          description: 'Welcome to Agentcrafter! Please check your email to confirm your account.',
         });
         
-        // In a real application, here is where you would redirect to the Stripe payment page
         navigate('/dashboard');
       }
     } catch (error) {
@@ -118,7 +117,7 @@ const SignUpForm = () => {
               Creating account...
             </>
           ) : (
-            'Create account - $10/month'
+            'Create Free Account'
           )}
         </Button>
         

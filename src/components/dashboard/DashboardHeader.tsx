@@ -13,9 +13,9 @@ const DashboardHeader = () => {
     <div className="border-b pb-6 mb-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Welcome, {userName.split(' ')[0]}!</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Welcome to Agentcrafter, {userName.split(' ')[0]}!</h1>
           <p className="text-muted-foreground mt-1">
-            Create and manage your AI prompts
+            Create and manage your AI agent prompts
           </p>
         </div>
         
