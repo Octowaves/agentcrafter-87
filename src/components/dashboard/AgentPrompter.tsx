@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -62,7 +61,7 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
     console.log('Sending request to webhook with payload:', payload);
 
     try {
-      const response = await fetch('http://localhost:5678/webhook/agentcrafter', {
+      const response = await fetch('http://localhost:5678/webhook-test/agentcrafter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
