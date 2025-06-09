@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -146,66 +144,16 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
 
   const formatMarkdownText = (text: string) => {
     return text
-      // First handle escaped newlines
+      // Handle escaped newlines first
       .replace(/\\n/g, '\n')
-      
-      // Convert headers with proper spacing - ensuring proper hierarchy
-      .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold text-gray-900 mt-8 mb-6 border-b-2 border-blue-300 pb-3">$1</h1>')
-      .replace(/^## (.*$)/gim, '<h2 class="text-xl font-semibold text-gray-900 mt-6 mb-4 border-b border-blue-200 pb-2">$1</h2>')
-      .replace(/^### (.*$)/gim, '<h3 class="text-lg font-medium text-gray-900 mt-5 mb-3">$1</h3>')
-      .replace(/^#### (.*$)/gim, '<h4 class="text-base font-medium text-gray-900 mt-4 mb-2">$1</h4>')
-      
-      // Convert bold text - handle both **text** and text within markdown
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
-      
-      // Convert italic text
-      .replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em class="italic text-gray-800">$1</em>')
-      
-      // Convert code blocks with syntax highlighting
-      .replace(/```(\w+)?\n?([\s\S]*?)```/g, '<pre class="bg-gray-100 border border-gray-200 p-4 rounded-lg my-4 overflow-x-auto"><code class="text-sm text-gray-800 font-mono">$2</code></pre>')
-      
-      // Convert inline code
-      .replace(/`([^`\n]+)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm text-gray-800 font-mono">$1</code>')
-      
-      // Convert numbered lists with proper spacing
-      .replace(/^(\d+)\.\s+(.*$)/gim, '<li class="mb-2 text-gray-700 leading-relaxed">$2</li>')
-      
-      // Convert bullet points with proper spacing
-      .replace(/^[-*+]\s+(.*$)/gim, '<li class="mb-2 text-gray-700 leading-relaxed">$1</li>')
-      
-      // Handle paragraphs - split on double newlines first
-      .split('\n\n')
-      .map(paragraph => {
-        // Skip if it's already HTML (starts with <)
-        if (paragraph.trim().startsWith('<')) {
-          return paragraph;
-        }
-        // Skip empty paragraphs
-        if (!paragraph.trim()) {
-          return '';
-        }
-        // Convert single newlines to <br> within paragraphs
-        const formattedParagraph = paragraph.replace(/\n/g, '<br />');
-        return `<p class="mb-4 text-gray-700 leading-relaxed">${formattedParagraph}</p>`;
+      // Ensure proper spacing around headers
+      .replace(/^(#{1,6})\s*(.*?)$/gm, (match, hashes, title) => {
+        return `\n${hashes} ${title}\n`;
       })
-      .join('\n\n')
-      
-      // Wrap consecutive list items in proper ul/ol containers
-      .replace(/(<li[^>]*>.*?<\/li>(\s*<li[^>]*>.*?<\/li>)*)/gs, (match) => {
-        // Check if it contains numbered list items
-        if (/^\s*<li[^>]*>\d+\./.test(match)) {
-          return `<ol class="list-decimal ml-6 mb-4 space-y-1">${match}</ol>`;
-        } else {
-          return `<ul class="list-disc ml-6 mb-4 space-y-1">${match}</ul>`;
-        }
-      })
-      
-      // Clean up empty paragraphs
-      .replace(/<p[^>]*>\s*<\/p>/g, '')
-      
-      // Add proper spacing around headers
-      .replace(/(<\/[h1-6]>)\s*(<p|<ul|<ol)/g, '$1\n\n$2')
-      .replace(/(<\/p>|<\/ul>|<\/ol>)\s*(<h[1-6])/g, '$1\n\n$2');
+      // Ensure proper spacing around sections
+      .replace(/\n{3,}/g, '\n\n')
+      // Clean up any leading/trailing whitespace
+      .trim();
   };
 
   return (
@@ -383,12 +331,9 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
             {generatedPrompt ? (
               <div className="space-y-4">
                 <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-lg border border-gray-200 max-h-96 overflow-y-auto shadow-inner">
-                  <div 
-                    className="prose prose-sm max-w-none text-gray-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ 
-                      __html: formatMarkdownText(generatedPrompt) 
-                    }}
-                  />
+                  <pre className="whitespace-pre-wrap text-sm text-gray-700 leading-relaxed font-mono">
+                    {formatMarkdownText(generatedPrompt)}
+                  </pre>
                 </div>
                 <div className="flex space-x-2">
                   <Button variant="outline" onClick={copyToClipboard} className="flex-1 hover:bg-blue-50 hover:border-blue-300">
@@ -415,4 +360,3 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
 };
 
 export default AgentPrompter;
-
