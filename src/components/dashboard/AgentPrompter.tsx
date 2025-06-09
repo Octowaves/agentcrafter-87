@@ -7,8 +7,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Loader2, ArrowLeft, Sparkles, Copy, Download } from 'lucide-react';
+import { Loader2, ArrowLeft, Sparkles, Copy, Download, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface AgentPrompterProps {
   onBack: () => void;
@@ -28,6 +29,7 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
   });
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedPrompt, setGeneratedPrompt] = useState('');
+  const [lastError, setLastError] = useState<string | null>(null);
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -50,6 +52,14 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
     }
 
     setIsGenerating(true);
+    setLastError(null);
+
+    const payload = {
+      user_id: user?.id,
+      ...formData
+    };
+
+    console.log('Sending request to webhook with payload:', payload);
 
     try {
       const response = await fetch('https://n8n-vclt.onrender.com/webhook/agentcrafter', {
@@ -57,18 +67,23 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          user_id: user?.id,
-          ...formData
-        }),
+        body: JSON.stringify(payload),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
       if (!response.ok) {
-        throw new Error('Failed to generate prompt');
+        const errorText = await response.text();
+        console.error('Server error response:', errorText);
+        throw new Error(`Server error: ${response.status} ${response.statusText}`);
       }
 
       const result = await response.text();
+      console.log('Success response:', result);
+      
       setGeneratedPrompt(result);
+      setLastError(null);
 
       toast({
         title: 'Prompt generated successfully!',
@@ -76,9 +91,20 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
       });
     } catch (error) {
       console.error('Error generating prompt:', error);
+      
+      let errorMessage = 'There was an error generating your prompt.';
+      
+      if (error instanceof TypeError && error.message === 'Failed to fetch') {
+        errorMessage = 'Unable to connect to the prompt generation service. The service might be temporarily unavailable.';
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      
+      setLastError(errorMessage);
+      
       toast({
         title: 'Generation failed',
-        description: 'There was an error generating your prompt. Please try again.',
+        description: errorMessage,
         variant: 'destructive',
       });
     } finally {
@@ -122,6 +148,20 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
           <p className="text-gray-600">Transform your rough ideas into polished, effective prompts</p>
         </div>
       </div>
+
+      {/* Error Alert */}
+      {lastError && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>
+            {lastError}
+            <br />
+            <span className="text-sm opacity-75 mt-1 block">
+              If this persists, the webhook service may be down. Please try again later.
+            </span>
+          </AlertDescription>
+        </Alert>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Input Form */}
