@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -144,7 +145,10 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
 
   const formatMarkdownText = (text: string) => {
     return text
-      // Convert headers
+      // First handle escaped newlines
+      .replace(/\\n/g, '\n')
+      
+      // Convert headers with proper spacing
       .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold text-gray-900 mt-6 mb-3 border-b border-gray-200 pb-2">$1</h3>')
       .replace(/^## (.*$)/gim, '<h2 class="text-xl font-bold text-gray-900 mt-8 mb-4 border-b-2 border-blue-200 pb-2">$1</h2>')
       .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold text-gray-900 mt-8 mb-4">$1</h1>')
@@ -152,15 +156,34 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
       // Convert bold text
       .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
       
+      // Convert italic text
+      .replace(/\*(.*?)\*/g, '<em class="italic text-gray-800">$1</em>')
+      
+      // Convert numbered lists
+      .replace(/^(\d+)\.\s+(.*$)/gim, '<li class="ml-6 mb-2 text-gray-700 list-decimal">$2</li>')
+      
       // Convert bullet points
-      .replace(/^- (.*$)/gim, '<li class="ml-4 mb-2 text-gray-700">$1</li>')
+      .replace(/^[-*]\s+(.*$)/gim, '<li class="ml-6 mb-2 text-gray-700 list-disc">$1</li>')
       
-      // Convert line breaks
-      .replace(/\\n\\n/g, '</p><p class="mb-4 text-gray-700 leading-relaxed">')
-      .replace(/\\n/g, '<br />')
+      // Convert code blocks
+      .replace(/```([\s\S]*?)```/g, '<pre class="bg-gray-100 p-4 rounded-lg my-4 overflow-x-auto"><code class="text-sm text-gray-800">$1</code></pre>')
       
-      // Wrap in paragraphs if not already wrapped
-      .replace(/^(?!<[h|l|p])(.*$)/gim, '<p class="mb-4 text-gray-700 leading-relaxed">$1</p>');
+      // Convert inline code
+      .replace(/`([^`]*)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm text-gray-800">$1</code>')
+      
+      // Convert line breaks - handle double newlines as paragraphs
+      .replace(/\n\n/g, '</p><p class="mb-4 text-gray-700 leading-relaxed">')
+      .replace(/\n/g, '<br />')
+      
+      // Wrap content in initial paragraph if it doesn't start with a header
+      .replace(/^(?!<[h1-6])(.*)/s, '<p class="mb-4 text-gray-700 leading-relaxed">$1</p>')
+      
+      // Clean up empty paragraphs
+      .replace(/<p[^>]*><\/p>/g, '')
+      
+      // Wrap lists in proper ul/ol tags
+      .replace(/(<li[^>]*class="[^"]*list-disc[^"]*"[^>]*>.*?<\/li>)/gs, '<ul class="list-disc ml-4 mb-4">$1</ul>')
+      .replace(/(<li[^>]*class="[^"]*list-decimal[^"]*"[^>]*>.*?<\/li>)/gs, '<ol class="list-decimal ml-4 mb-4">$1</ol>');
   };
 
   return (
@@ -339,7 +362,7 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
               <div className="space-y-4">
                 <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-lg border border-gray-200 max-h-96 overflow-y-auto shadow-inner">
                   <div 
-                    className="prose prose-sm max-w-none"
+                    className="prose prose-sm max-w-none [&>ul]:list-disc [&>ol]:list-decimal [&>ul]:ml-4 [&>ol]:ml-4"
                     dangerouslySetInnerHTML={{ 
                       __html: formatMarkdownText(generatedPrompt) 
                     }}
