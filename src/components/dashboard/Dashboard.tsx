@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import DashboardHeader from './DashboardHeader';
-import PromptGenerator from './PromptGenerator';
-import PromptsHistory from './PromptsHistory';
+import AgentPrompter from './AgentPrompter';
+import ToolsGrid from './ToolsGrid';
 import UserDetailsForm from '@/components/UserDetailsForm';
 import { Loader2 } from 'lucide-react';
 
@@ -11,6 +11,7 @@ const Dashboard = () => {
   const { user, profile, isLoading } = useAuth();
   const [userDetailsCompleted, setUserDetailsCompleted] = useState(false);
   const [checkingDetails, setCheckingDetails] = useState(true);
+  const [selectedTool, setSelectedTool] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isLoading && user) {
@@ -34,7 +35,7 @@ const Dashboard = () => {
   if (isLoading || checkingDetails) {
     return (
       <div className="h-screen flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-prompter-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
@@ -68,17 +69,14 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <DashboardHeader />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <PromptGenerator />
-          </div>
-          <div className="lg:col-span-1">
-            <PromptsHistory />
-          </div>
-        </div>
+        {selectedTool === 'agent-prompter' ? (
+          <AgentPrompter onBack={() => setSelectedTool(null)} />
+        ) : (
+          <ToolsGrid onSelectTool={setSelectedTool} />
+        )}
       </main>
     </div>
   );
