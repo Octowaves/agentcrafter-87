@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Session, User } from '@supabase/supabase-js';
@@ -75,10 +74,36 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     );
 
-    // Check for initial session and handle URL fragments
+    // Handle initial session and email verification from URL
     const handleInitialAuth = async () => {
       try {
-        // First, try to get session from URL (for email confirmation)
+        // Check if there are auth tokens in the URL hash
+        const hashParams = new URLSearchParams(window.location.hash.substring(1));
+        const accessToken = hashParams.get('access_token');
+        const refreshToken = hashParams.get('refresh_token');
+        
+        if (accessToken && refreshToken) {
+          // Set the session using the tokens from the URL
+          const { data, error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          });
+          
+          if (error) {
+            console.error('Error setting session from URL:', error);
+            toast({
+              title: "Verification failed",
+              description: "There was an error verifying your email. Please try again.",
+              variant: "destructive"
+            });
+          } else if (data.session) {
+            // Clear the URL hash
+            window.history.replaceState(null, '', window.location.pathname);
+            return; // Let the auth state change handler take over
+          }
+        }
+        
+        // If no tokens in URL, get existing session
         const { data, error } = await supabase.auth.getSession();
         
         if (data.session) {
