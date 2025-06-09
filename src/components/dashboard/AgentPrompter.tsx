@@ -54,14 +54,22 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
     setLastError(null);
 
     const payload = {
-      user_id: user?.id,
-      ...formData
+      user_account_id: user?.id,
+      agent_name: formData.agentName,
+      agent_type: formData.agentType,
+      industry: formData.industry,
+      primary_goal: formData.primaryGoal,
+      target_audience: formData.targetAudience,
+      key_functions: formData.keyFunctions,
+      tone_style: formData.toneStyle,
+      constraints: formData.constraints,
+      examples: formData.examples
     };
 
     console.log('Sending request to webhook with payload:', payload);
 
     try {
-      const response = await fetch('http://localhost:5678/webhook-test/agentcrafter', {
+      const response = await fetch('https://flow.sokt.io/func/scriJNusLMve', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
