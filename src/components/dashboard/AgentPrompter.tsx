@@ -6,12 +6,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Loader2, ArrowLeft, Sparkles, Copy, Download, AlertCircle } from 'lucide-react';
+import { Loader2, ArrowLeft, Sparkles, Copy, Download, AlertCircle, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface AgentPrompterProps {
   onBack: () => void;
+}
+
+interface ChatMessage {
+  id: string;
+  content: string;
+  sender: 'user' | 'ai';
+  timestamp: Date;
 }
 
 const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
@@ -29,6 +36,9 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedPrompt, setGeneratedPrompt] = useState('');
   const [lastError, setLastError] = useState<string | null>(null);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatInput, setChatInput] = useState('');
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -91,6 +101,14 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
       
       setGeneratedPrompt(result);
       setLastError(null);
+      
+      // Initialize chat with the AI response
+      setChatMessages([{
+        id: Date.now().toString(),
+        content: result,
+        sender: 'ai',
+        timestamp: new Date()
+      }]);
 
       toast({
         title: 'Prompt generated successfully!',
@@ -116,6 +134,70 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
       });
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const sendChatMessage = async () => {
+    if (!chatInput.trim()) return;
+
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      content: chatInput.trim(),
+      sender: 'user',
+      timestamp: new Date()
+    };
+
+    setChatMessages(prev => [...prev, userMessage]);
+    setIsSendingMessage(true);
+    setChatInput('');
+
+    try {
+      const payload = {
+        user_account_id: user?.id,
+        message: userMessage.content,
+        conversation_context: chatMessages.map(msg => ({
+          role: msg.sender === 'user' ? 'user' : 'assistant',
+          content: msg.content
+        }))
+      };
+
+      const response = await fetch('https://flow.sokt.io/func/scriJNusLMve', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status} ${response.statusText}`);
+      }
+
+      const result = await response.text();
+      
+      const aiMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        content: result,
+        sender: 'ai',
+        timestamp: new Date()
+      };
+
+      setChatMessages(prev => [...prev, aiMessage]);
+      
+      toast({
+        title: 'Message sent successfully!',
+        description: 'AI has responded to your message.',
+      });
+    } catch (error) {
+      console.error('Error sending chat message:', error);
+      
+      toast({
+        title: 'Failed to send message',
+        description: 'There was an error sending your message. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSendingMessage(false);
     }
   };
 
@@ -305,41 +387,109 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
           </CardContent>
         </Card>
 
-        {/* Output */}
-        <Card className="h-fit">
-          <CardHeader>
-            <CardTitle>Generated Prompt</CardTitle>
-            <CardDescription>
-              Your polished, ready-to-use AI agent prompt
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {generatedPrompt ? (
-              <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-lg border max-h-96 overflow-y-auto">
-                  <pre className="whitespace-pre-wrap text-sm text-gray-800 font-mono leading-relaxed">
-                    {generatedPrompt}
-                  </pre>
+        {/* Output and Chat */}
+        <div className="space-y-6">
+          <Card className="h-fit">
+            <CardHeader>
+              <CardTitle>Generated Prompt</CardTitle>
+              <CardDescription>
+                Your polished, ready-to-use AI agent prompt
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {generatedPrompt ? (
+                <div className="space-y-4">
+                  <div className="bg-gray-50 p-4 rounded-lg border max-h-96 overflow-y-auto">
+                    <pre className="whitespace-pre-wrap text-sm text-gray-800 font-mono leading-relaxed">
+                      {generatedPrompt}
+                    </pre>
+                  </div>
+                  <div className="flex space-x-2">
+                    <Button variant="outline" onClick={copyToClipboard} className="flex-1">
+                      <Copy className="mr-2 h-4 w-4" />
+                      Copy
+                    </Button>
+                    <Button variant="outline" onClick={downloadPrompt} className="flex-1">
+                      <Download className="mr-2 h-4 w-4" />
+                      Download
+                    </Button>
+                  </div>
                 </div>
+              ) : (
+                <div className="text-center py-12 text-gray-500">
+                  <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-30" />
+                  <p>Fill in the form and click "Generate Prompt" to see your polished prompt here.</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Chat Section */}
+          {chatMessages.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Continue the Conversation</CardTitle>
+                <CardDescription>
+                  Ask questions or request modifications to refine your prompt
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Chat Messages */}
+                <div className="max-h-64 overflow-y-auto space-y-3 border rounded-lg p-4 bg-gray-50">
+                  {chatMessages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div
+                        className={`max-w-[80%] p-3 rounded-lg ${
+                          message.sender === 'user'
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-white border border-gray-200'
+                        }`}
+                      >
+                        <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                        <p className={`text-xs mt-1 ${
+                          message.sender === 'user' ? 'text-blue-100' : 'text-gray-500'
+                        }`}>
+                          {message.timestamp.toLocaleTimeString()}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Chat Input */}
                 <div className="flex space-x-2">
-                  <Button variant="outline" onClick={copyToClipboard} className="flex-1">
-                    <Copy className="mr-2 h-4 w-4" />
-                    Copy
-                  </Button>
-                  <Button variant="outline" onClick={downloadPrompt} className="flex-1">
-                    <Download className="mr-2 h-4 w-4" />
-                    Download
+                  <Textarea
+                    placeholder="Ask a follow-up question or request modifications..."
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    rows={2}
+                    className="flex-1"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendChatMessage();
+                      }
+                    }}
+                  />
+                  <Button
+                    onClick={sendChatMessage}
+                    disabled={isSendingMessage || !chatInput.trim()}
+                    className="self-end"
+                  >
+                    {isSendingMessage ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Send className="h-4 w-4" />
+                    )}
                   </Button>
                 </div>
-              </div>
-            ) : (
-              <div className="text-center py-12 text-gray-500">
-                <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-30" />
-                <p>Fill in the form and click "Generate Prompt" to see your polished prompt here.</p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </div>
     </div>
   );
