@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -60,6 +59,7 @@ export default {
 				// Chakra UI inspired color palette
 				chakra: {
 					blue: {
+						25: 'hsl(var(--chakra-blue-25))',
 						50: 'hsl(var(--chakra-blue-50))',
 						100: 'hsl(var(--chakra-blue-100))',
 						200: 'hsl(var(--chakra-blue-200))',
