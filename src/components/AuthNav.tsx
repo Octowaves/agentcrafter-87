@@ -1,15 +1,15 @@
 
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import AgentCrafterButton from "./AgentCrafterButton";
 
 const AuthNav = () => {
   return (
     <div className="flex items-center gap-4">
       <Link to="/sign-in">
-        <Button variant="outline">Sign In</Button>
+        <AgentCrafterButton variant="outline">Sign In</AgentCrafterButton>
       </Link>
       <Link to="/sign-up">
-        <Button>Get Started Free</Button>
+        <AgentCrafterButton>Get Started Free</AgentCrafterButton>
       </Link>
     </div>
   );

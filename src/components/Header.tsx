@@ -5,7 +5,6 @@ import AgentCrafterButton from './AgentCrafterButton';
 import { Link } from 'react-router-dom';
 import AuthNav from './AuthNav';
 import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -115,14 +114,14 @@ const Header = () => {
                     className="w-full" 
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Button variant="outline" className="w-full text-lg py-3">Sign In</Button>
+                    <AgentCrafterButton variant="outline" className="w-full text-lg py-3">Sign In</AgentCrafterButton>
                   </Link>
                   <Link 
                     to="/sign-up" 
                     className="w-full"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Button className="w-full text-lg py-3">Get Started Free</Button>
+                    <AgentCrafterButton className="w-full text-lg py-3">Get Started Free</AgentCrafterButton>
                   </Link>
                 </div>
               )}

@@ -31,29 +31,29 @@ const FaqSection = () => {
   ];
 
   return (
-    <section className="section-padding bg-gradient-to-b from-gray-50 to-white" id="faq">
+    <section className="section-padding bg-gradient-to-b from-gray-50/50 to-white" id="faq">
       <div className="container px-4 mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 text-gray-900">
             Frequently Asked Questions
           </h2>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-2xl md:text-3xl text-gray-600 max-w-4xl mx-auto font-medium">
             Everything you need to know about Agent Crafter
           </p>
         </div>
         
-        <div className="max-w-4xl mx-auto">
-          <Accordion type="single" collapsible className="w-full space-y-6">
+        <div className="max-w-5xl mx-auto">
+          <Accordion type="single" collapsible className="w-full space-y-8">
             {faqs.map((faq, index) => (
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`} 
-                className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="bg-white rounded-3xl overflow-hidden border-2 border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300"
               >
-                <AccordionTrigger className="px-8 py-6 text-xl md:text-2xl font-semibold text-left hover:no-underline text-gray-800 hover:text-blue-600">
+                <AccordionTrigger className="px-10 py-8 text-2xl md:text-3xl font-bold text-left hover:no-underline text-gray-800 hover:text-blue-600">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="px-8 pb-6 text-lg text-gray-600 leading-relaxed">
+                <AccordionContent className="px-10 pb-8 text-xl text-gray-600 leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
