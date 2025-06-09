@@ -21,6 +21,7 @@ type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const { signUp } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -47,12 +48,11 @@ const SignUpForm = () => {
           variant: 'destructive',
         });
       } else {
+        setEmailSent(true);
         toast({
-          title: 'Sign up successful',
-          description: 'Welcome to Agentcrafter! Please check your email to confirm your account.',
+          title: 'Check your email',
+          description: 'We sent you a confirmation link. Please check your email and click the link to verify your account.',
         });
-        
-        navigate('/dashboard');
       }
     } catch (error) {
       toast({
@@ -64,6 +64,27 @@ const SignUpForm = () => {
       setIsLoading(false);
     }
   };
+
+  if (emailSent) {
+    return (
+      <div className="text-center space-y-4">
+        <div className="text-2xl font-semibold">Check your email</div>
+        <p className="text-gray-600">
+          We've sent a confirmation link to <strong>{form.getValues('email')}</strong>
+        </p>
+        <p className="text-sm text-gray-500">
+          Click the link in the email to verify your account and complete the signup process.
+        </p>
+        <Button 
+          variant="outline" 
+          onClick={() => setEmailSent(false)}
+          className="mt-4"
+        >
+          Back to form
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <Form {...form}>

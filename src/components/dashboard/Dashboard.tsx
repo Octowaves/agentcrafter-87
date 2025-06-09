@@ -1,69 +1,85 @@
 
-import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import DashboardHeader from './DashboardHeader';
 import PromptGenerator from './PromptGenerator';
 import PromptsHistory from './PromptsHistory';
 import UserDetailsForm from '@/components/UserDetailsForm';
-
-interface UserDetails {
-  fullName: string;
-  email: string;
-  country: string;
-  dateOfBirth: string;
-}
+import { Loader2 } from 'lucide-react';
 
 const Dashboard = () => {
-  const [isCreatingPrompt, setIsCreatingPrompt] = useState(false);
+  const { user, profile, isLoading } = useAuth();
   const [userDetailsCompleted, setUserDetailsCompleted] = useState(false);
-  
-  const handleUserDetailsComplete = (details: UserDetails) => {
-    console.log('User details completed:', details);
+  const [checkingDetails, setCheckingDetails] = useState(true);
+
+  useEffect(() => {
+    if (!isLoading && user) {
+      // Check if user has completed their profile
+      if (user.email_confirmed_at && profile) {
+        // Check if profile has all required fields
+        const hasRequiredFields = profile.full_name && 
+                                 profile.email && 
+                                 profile.country && 
+                                 profile.date_of_birth;
+        setUserDetailsCompleted(hasRequiredFields);
+      }
+      setCheckingDetails(false);
+    }
+  }, [user, profile, isLoading]);
+
+  const handleUserDetailsComplete = (details: any) => {
     setUserDetailsCompleted(true);
   };
 
-  // Show user details form if not completed
-  if (!userDetailsCompleted) {
+  if (isLoading || checkingDetails) {
     return (
-      <div className="container max-w-md mx-auto px-4 py-16">
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-          <div className="text-center mb-6">
-            <div className="w-12 h-12 bg-prompter-600 rounded-lg flex items-center justify-center text-white font-bold mx-auto mb-4">A</div>
-            <h1 className="text-2xl font-bold text-gray-900">Welcome to Agentcrafter</h1>
-          </div>
+      <div className="h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-prompter-600" />
+      </div>
+    );
+  }
+
+  // If user hasn't confirmed their email, show message
+  if (user && !user.email_confirmed_at) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
+          <h2 className="text-2xl font-semibold mb-4">Please verify your email</h2>
+          <p className="text-gray-600 mb-4">
+            We've sent a confirmation link to your email address. Please click the link to verify your account before accessing the dashboard.
+          </p>
+          <p className="text-sm text-gray-500">
+            Check your spam folder if you don't see the email in your inbox.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // If user hasn't completed their details, show the form
+  if (user && user.email_confirmed_at && !userDetailsCompleted) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
           <UserDetailsForm onComplete={handleUserDetailsComplete} />
         </div>
       </div>
     );
   }
-  
+
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gray-50">
       <DashboardHeader />
-      
-      {!isCreatingPrompt ? (
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Your Prompts</h2>
-          <Button onClick={() => setIsCreatingPrompt(true)}>
-            <Plus className="mr-2 h-4 w-4" />
-            New Prompt
-          </Button>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <PromptGenerator />
+          </div>
+          <div className="lg:col-span-1">
+            <PromptsHistory />
+          </div>
         </div>
-      ) : (
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Create New Prompt</h2>
-          <Button variant="outline" onClick={() => setIsCreatingPrompt(false)}>
-            Cancel
-          </Button>
-        </div>
-      )}
-      
-      {isCreatingPrompt ? (
-        <PromptGenerator />
-      ) : null}
-      
-      <PromptsHistory />
+      </main>
     </div>
   );
 };
