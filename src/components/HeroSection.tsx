@@ -1,71 +1,91 @@
 
 import React from 'react';
 import PrompterButton from './PrompterButton';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 const HeroSection = () => {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-white to-blue-50">
-      <div className="container px-4 mx-auto">
-        <div className="pt-20 pb-16 md:pt-28 md:pb-24 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 md:pr-12 mb-12 md:mb-0">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 mb-6 animate-fade-in">
-              Struggling to Write Agentic AI Prompts? Let Agentcrafter Do It for You.
+    <div className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"></div>
+      
+      <div className="container px-4 mx-auto relative z-10">
+        <div className="pt-32 pb-20 md:pt-40 md:pb-28 text-center">
+          <div className="max-w-4xl mx-auto">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-4 py-2 mb-8 shadow-sm">
+              <Sparkles className="w-4 h-4 text-blue-600" />
+              <span className="text-sm font-medium text-gray-700">AI-Powered Prompt Engineering</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight text-gray-900 mb-8 animate-fade-in">
+              Craft Perfect{' '}
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+                AI Prompts
+              </span>{' '}
+              in Minutes
             </h1>
-            <p className="text-xl text-gray-600 mb-8 animate-fade-in-delayed">
-              Agentcrafter is your AI sidekick that crafts perfect prompts for your agents in minutes — no guesswork, just results.
+            
+            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-delayed">
+              Stop struggling with prompt engineering. Agentcrafter is your AI sidekick that creates optimized prompts for your agents — no guesswork, just results.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delayed">
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delayed">
               <PrompterButton 
                 size="lg" 
                 onClick={() => window.location.href = "/sign-up"}
+                className="px-8 py-4 text-lg font-semibold shadow-xl"
               >
-                Start Free <ArrowRight className="ml-2 h-5 w-5" />
+                Start Building Free <ArrowRight className="ml-2 h-5 w-5" />
               </PrompterButton>
-              <div className="text-sm text-gray-500 mt-2 sm:mt-4">
-                Completely free · No credit card required · Start crafting now
+              <div className="text-sm text-gray-500">
+                No credit card required • 100% free to start
               </div>
             </div>
           </div>
           
-          <div className="md:w-1/2 relative animate-slide-in-right">
-            <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 p-4">
-              <div className="bg-gray-50 rounded-xl p-4">
-                <div className="flex items-center mb-4">
-                  <div className="w-3 h-3 bg-red-400 rounded-full mr-2"></div>
-                  <div className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
-                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                  <div className="mx-auto text-sm text-gray-400">Agentcrafter AI Assistant</div>
+          {/* Hero illustration */}
+          <div className="mt-16 max-w-5xl mx-auto animate-slide-in-right">
+            <div className="relative bg-white/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/50 p-8 mx-4">
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 shadow-inner">
+                <div className="flex items-center mb-6">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="mx-auto text-sm font-medium text-gray-500">Agentcrafter AI Assistant</div>
                 </div>
-                <div className="space-y-4">
-                  <div className="bg-white p-3 rounded-lg shadow-sm">
-                    <p className="text-gray-600 text-sm">What are you trying to build with AI?</p>
+                <div className="space-y-4 text-left">
+                  <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <p className="text-gray-700 text-sm font-medium">What type of AI agent are you building?</p>
                   </div>
-                  <div className="bg-blue-50 p-3 rounded-lg shadow-sm ml-8">
-                    <p className="text-gray-800 text-sm">I need to create a customer service chatbot that can handle returns.</p>
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-xl shadow-sm ml-8 border border-blue-100">
+                    <p className="text-gray-800 text-sm">A customer service chatbot for e-commerce returns and refunds</p>
                   </div>
-                  <div className="bg-white p-3 rounded-lg shadow-sm">
-                    <p className="text-gray-600 text-sm">What platform are you using for this automation?</p>
+                  <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <p className="text-gray-700 text-sm font-medium">What platform will you use?</p>
                   </div>
-                  <div className="bg-blue-50 p-3 rounded-lg shadow-sm ml-8">
-                    <p className="text-gray-800 text-sm">I'm using Zapier with OpenAI integration.</p>
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-xl shadow-sm ml-8 border border-blue-100">
+                    <p className="text-gray-800 text-sm">Zapier with OpenAI GPT-4</p>
                   </div>
-                  <div className="bg-white p-3 rounded-lg shadow-sm">
-                    <p className="text-gray-600 text-sm">Generating your optimized prompt...</p>
-                    <div className="mt-2 h-2 bg-gray-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-prompter-500 rounded-full animate-pulse w-3/4"></div>
+                  <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-xl shadow-sm border border-green-100">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Sparkles className="w-4 h-4 text-green-600" />
+                      <p className="text-gray-700 text-sm font-medium">Generating your optimized prompt...</p>
+                    </div>
+                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse w-4/5"></div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-prompter-200 rounded-full opacity-70 blur-2xl"></div>
-            <div className="absolute -top-4 -right-4 w-32 h-32 bg-purple-200 rounded-full opacity-70 blur-3xl"></div>
           </div>
         </div>
       </div>
-      
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent"></div>
     </div>
   );
 };

@@ -17,18 +17,18 @@ const PrompterButton = ({
   className,
   onClick,
 }: ButtonProps) => {
-  const baseStyles = 'inline-flex items-center justify-center rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50';
+  const baseStyles = 'inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50 transform hover:scale-105 active:scale-95';
   
   const variants = {
-    primary: 'bg-prompter-600 text-white hover:bg-prompter-700 shadow-lg shadow-prompter-500/20',
-    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-    outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+    primary: 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl shadow-blue-500/25',
+    secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200 shadow-md hover:shadow-lg',
+    outline: 'border-2 border-gray-200 bg-white text-gray-900 hover:bg-gray-50 hover:border-gray-300 shadow-sm hover:shadow-md',
   };
   
   const sizes = {
-    default: 'h-12 px-6 py-2 text-base',
+    default: 'h-11 px-6 py-2 text-sm',
     sm: 'h-9 px-4 py-1 text-sm',
-    lg: 'h-14 px-8 py-3 text-lg',
+    lg: 'h-14 px-8 py-3 text-base',
   };
   
   return (
