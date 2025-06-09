@@ -120,7 +120,8 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(generatedPrompt);
+    const formattedText = formatMarkdownText(generatedPrompt);
+    navigator.clipboard.writeText(formattedText);
     toast({
       title: 'Copied to clipboard',
       description: 'The generated prompt has been copied to your clipboard.',
@@ -128,8 +129,9 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
   };
 
   const downloadPrompt = () => {
+    const formattedText = formatMarkdownText(generatedPrompt);
     const element = document.createElement('a');
-    const file = new Blob([generatedPrompt], { type: 'text/plain' });
+    const file = new Blob([formattedText], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
     element.download = `${formData.agentName || 'agent'}-prompt.txt`;
     document.body.appendChild(element);
