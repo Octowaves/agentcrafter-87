@@ -142,6 +142,27 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
     });
   };
 
+  const formatMarkdownText = (text: string) => {
+    return text
+      // Convert headers
+      .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold text-gray-900 mt-6 mb-3 border-b border-gray-200 pb-2">$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2 class="text-xl font-bold text-gray-900 mt-8 mb-4 border-b-2 border-blue-200 pb-2">$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold text-gray-900 mt-8 mb-4">$1</h1>')
+      
+      // Convert bold text
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
+      
+      // Convert bullet points
+      .replace(/^- (.*$)/gim, '<li class="ml-4 mb-2 text-gray-700">$1</li>')
+      
+      // Convert line breaks
+      .replace(/\\n\\n/g, '</p><p class="mb-4 text-gray-700 leading-relaxed">')
+      .replace(/\\n/g, '<br />')
+      
+      // Wrap in paragraphs if not already wrapped
+      .replace(/^(?!<[h|l|p])(.*$)/gim, '<p class="mb-4 text-gray-700 leading-relaxed">$1</p>');
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -316,17 +337,20 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
           <CardContent>
             {generatedPrompt ? (
               <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-lg border max-h-96 overflow-y-auto">
-                  <pre className="whitespace-pre-wrap text-sm text-gray-800 font-mono leading-relaxed">
-                    {generatedPrompt}
-                  </pre>
+                <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-lg border border-gray-200 max-h-96 overflow-y-auto shadow-inner">
+                  <div 
+                    className="prose prose-sm max-w-none"
+                    dangerouslySetInnerHTML={{ 
+                      __html: formatMarkdownText(generatedPrompt) 
+                    }}
+                  />
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" onClick={copyToClipboard} className="flex-1">
+                  <Button variant="outline" onClick={copyToClipboard} className="flex-1 hover:bg-blue-50 hover:border-blue-300">
                     <Copy className="mr-2 h-4 w-4" />
                     Copy
                   </Button>
-                  <Button variant="outline" onClick={downloadPrompt} className="flex-1">
+                  <Button variant="outline" onClick={downloadPrompt} className="flex-1 hover:bg-green-50 hover:border-green-300">
                     <Download className="mr-2 h-4 w-4" />
                     Download
                   </Button>
