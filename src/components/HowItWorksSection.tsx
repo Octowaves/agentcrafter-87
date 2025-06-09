@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { MessageSquare, Sparkles, ArrowRight } from 'lucide-react';
-import PrompterButton from './PrompterButton';
+import AgentCrafterButton from './AgentCrafterButton';
 
 const HowItWorksSection = () => {
   const [showExample, setShowExample] = useState(false);
@@ -14,7 +14,7 @@ const HowItWorksSection = () => {
     },
     {
       icon: <Sparkles className="w-10 h-10 text-prompter-500" />,
-      title: "Let Prompter craft your prompt",
+      title: "Let Agent Crafter craft your prompt",
       description: "Our AI analyzes your needs and generates an optimized prompt tailored for your use case."
     },
     {
@@ -56,7 +56,7 @@ CONSTRAINTS:
           Get the Right Prompt in 3 Easy Steps
         </h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Prompter turns your requirements into expertly crafted AI prompts through a guided conversation.
+          Agent Crafter turns your requirements into expertly crafted AI prompts through a guided conversation.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -76,12 +76,12 @@ CONSTRAINTS:
         </div>
         
         <div className="text-center">
-          <PrompterButton 
+          <AgentCrafterButton 
             variant="outline" 
             onClick={() => setShowExample(!showExample)}
           >
             {showExample ? "Hide Example" : "See an Example Prompt"}
-          </PrompterButton>
+          </AgentCrafterButton>
         </div>
         
         {showExample && (

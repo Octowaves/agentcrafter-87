@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import PrompterButton from './PrompterButton';
+import AgentCrafterButton from './AgentCrafterButton';
 import { Link } from 'react-router-dom';
 import AuthNav from './AuthNav';
 import { useAuth } from '@/contexts/AuthContext';
@@ -62,9 +62,9 @@ const Header = () => {
           <div className="hidden md:block">
             {user ? (
               <Link to="/dashboard">
-                <PrompterButton className="shadow-lg">
+                <AgentCrafterButton className="shadow-lg">
                   Dashboard
-                </PrompterButton>
+                </AgentCrafterButton>
               </Link>
             ) : (
               <AuthNav />
@@ -104,9 +104,9 @@ const Header = () => {
                   className="w-full"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <PrompterButton className="w-full">
+                  <AgentCrafterButton className="w-full">
                     Dashboard
-                  </PrompterButton>
+                  </AgentCrafterButton>
                 </Link>
               ) : (
                 <div className="flex flex-col space-y-3 pt-4 border-t border-gray-200">
