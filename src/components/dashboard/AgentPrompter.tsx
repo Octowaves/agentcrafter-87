@@ -62,7 +62,7 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
     console.log('Sending request to webhook with payload:', payload);
 
     try {
-      const response = await fetch('https://n8n-vclt.onrender.com/webhook/agentcrafter', {
+      const response = await fetch('http://localhost:5678/webhook/agentcrafter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
