@@ -11,6 +11,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ForgotPassword from "./pages/ForgotPassword";
 import DashboardPage from "./pages/DashboardPage";
+import Settings from "./pages/Settings";
 import AuthGuard from "./components/AuthGuard";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
             {/* Protected Routes */}
             <Route element={<AuthGuard requireAuth={true} />}>
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
             
             {/* Catch-all route */}

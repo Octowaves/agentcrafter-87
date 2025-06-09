@@ -2,10 +2,12 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { LogOut, Settings, User, KeyRound } from 'lucide-react';
+import { LogOut, Settings } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardHeader = () => {
   const { user, profile, signOut } = useAuth();
+  const navigate = useNavigate();
   
   const userName = profile?.full_name || user?.email?.split('@')[0] || 'User';
   
@@ -40,17 +42,12 @@ const DashboardHeader = () => {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
-              <User className="mr-2 h-4 w-4" />
-              Profile Settings
-            </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">
-              <KeyRound className="mr-2 h-4 w-4" />
-              Update Password
-            </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem 
+              onClick={() => navigate('/settings')}
+              className="cursor-pointer"
+            >
               <Settings className="mr-2 h-4 w-4" />
-              Account Settings
+              Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem 
