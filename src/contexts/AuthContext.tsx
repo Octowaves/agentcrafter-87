@@ -14,6 +14,7 @@ type AuthContextType = {
   signOut: () => Promise<void>;
   forgotPassword: (email: string) => Promise<{ error: any }>;
   updateProfile: (data: any) => Promise<{ error: any }>;
+  verifyOTP: (email: string, otp: string) => Promise<{ error: any }>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -74,36 +75,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     );
 
-    // Handle initial session and email verification from URL
-    const handleInitialAuth = async () => {
+    // Get initial session
+    const getInitialSession = async () => {
       try {
-        // Check if there are auth tokens in the URL hash
-        const hashParams = new URLSearchParams(window.location.hash.substring(1));
-        const accessToken = hashParams.get('access_token');
-        const refreshToken = hashParams.get('refresh_token');
-        
-        if (accessToken && refreshToken) {
-          // Set the session using the tokens from the URL
-          const { data, error } = await supabase.auth.setSession({
-            access_token: accessToken,
-            refresh_token: refreshToken,
-          });
-          
-          if (error) {
-            console.error('Error setting session from URL:', error);
-            toast({
-              title: "Verification failed",
-              description: "There was an error verifying your email. Please try again.",
-              variant: "destructive"
-            });
-          } else if (data.session) {
-            // Clear the URL hash
-            window.history.replaceState(null, '', window.location.pathname);
-            return; // Let the auth state change handler take over
-          }
-        }
-        
-        // If no tokens in URL, get existing session
         const { data, error } = await supabase.auth.getSession();
         
         if (data.session) {
@@ -121,7 +95,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     };
 
-    handleInitialAuth();
+    getInitialSession();
 
     return () => {
       subscription.unsubscribe();
@@ -137,13 +111,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           data: {
             full_name: fullName,
           },
-          emailRedirectTo: `${window.location.origin}/dashboard`
         },
       });
       
       return { error };
     } catch (error) {
       console.error('Error during sign up:', error);
+      return { error };
+    }
+  };
+
+  const verifyOTP = async (email: string, otp: string) => {
+    try {
+      const { error } = await supabase.auth.verifyOtp({
+        email,
+        token: otp,
+        type: 'signup',
+      });
+      
+      return { error };
+    } catch (error) {
+      console.error('Error during OTP verification:', error);
       return { error };
     }
   };
@@ -225,6 +213,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signOut,
     forgotPassword,
     updateProfile,
+    verifyOTP,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

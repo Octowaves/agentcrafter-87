@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { Loader2 } from 'lucide-react';
 
 const signUpSchema = z.object({
@@ -17,16 +18,22 @@ const signUpSchema = z.object({
   password: z.string().min(8, { message: 'Password must be at least 8 characters' }),
 });
 
+const otpSchema = z.object({
+  otp: z.string().min(6, { message: 'Please enter the 6-digit code' }),
+});
+
 type SignUpFormValues = z.infer<typeof signUpSchema>;
+type OTPFormValues = z.infer<typeof otpSchema>;
 
 const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
-  const { signUp } = useAuth();
+  const [showOTPForm, setShowOTPForm] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const { signUp, verifyOTP } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const form = useForm<SignUpFormValues>({
+  const signUpForm = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       fullName: '',
@@ -35,7 +42,14 @@ const SignUpForm = () => {
     },
   });
 
-  const onSubmit = async (data: SignUpFormValues) => {
+  const otpForm = useForm<OTPFormValues>({
+    resolver: zodResolver(otpSchema),
+    defaultValues: {
+      otp: '',
+    },
+  });
+
+  const onSignUpSubmit = async (data: SignUpFormValues) => {
     setIsLoading(true);
     
     try {
@@ -48,10 +62,11 @@ const SignUpForm = () => {
           variant: 'destructive',
         });
       } else {
-        setEmailSent(true);
+        setUserEmail(data.email);
+        setShowOTPForm(true);
         toast({
           title: 'Check your email',
-          description: 'We sent you a confirmation link. Please check your email and click the link to verify your account.',
+          description: 'We sent you a 6-digit verification code. Please enter it below.',
         });
       }
     } catch (error) {
@@ -65,32 +80,108 @@ const SignUpForm = () => {
     }
   };
 
-  if (emailSent) {
+  const onOTPSubmit = async (data: OTPFormValues) => {
+    setIsLoading(true);
+    
+    try {
+      const { error } = await verifyOTP(userEmail, data.otp);
+      
+      if (error) {
+        toast({
+          title: 'Verification failed',
+          description: error.message,
+          variant: 'destructive',
+        });
+      } else {
+        toast({
+          title: 'Account verified successfully!',
+          description: 'Welcome to Agentcrafter. Please complete your profile to continue.',
+        });
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      toast({
+        title: 'Something went wrong',
+        description: 'Please try again later.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (showOTPForm) {
     return (
-      <div className="text-center space-y-4">
-        <div className="text-2xl font-semibold">Check your email</div>
-        <p className="text-gray-600">
-          We've sent a confirmation link to <strong>{form.getValues('email')}</strong>
-        </p>
-        <p className="text-sm text-gray-500">
-          Click the link in the email to verify your account and complete the signup process.
-        </p>
-        <Button 
-          variant="outline" 
-          onClick={() => setEmailSent(false)}
-          className="mt-4"
-        >
-          Back to form
-        </Button>
+      <div className="space-y-6">
+        <div className="text-center">
+          <h3 className="text-2xl font-semibold mb-2">Verify your email</h3>
+          <p className="text-gray-600 mb-4">
+            We've sent a 6-digit code to <strong>{userEmail}</strong>
+          </p>
+        </div>
+
+        <Form {...otpForm}>
+          <form onSubmit={otpForm.handleSubmit(onOTPSubmit)} className="space-y-6">
+            <FormField
+              control={otpForm.control}
+              name="otp"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Verification Code</FormLabel>
+                  <FormControl>
+                    <div className="flex justify-center">
+                      <InputOTP
+                        maxLength={6}
+                        {...field}
+                        disabled={isLoading}
+                      >
+                        <InputOTPGroup>
+                          <InputOTPSlot index={0} />
+                          <InputOTPSlot index={1} />
+                          <InputOTPSlot index={2} />
+                          <InputOTPSlot index={3} />
+                          <InputOTPSlot index={4} />
+                          <InputOTPSlot index={5} />
+                        </InputOTPGroup>
+                      </InputOTP>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Verifying...
+                </>
+              ) : (
+                'Verify Account'
+              )}
+            </Button>
+            
+            <Button 
+              type="button"
+              variant="outline" 
+              onClick={() => setShowOTPForm(false)}
+              className="w-full"
+              disabled={isLoading}
+            >
+              Back to signup
+            </Button>
+          </form>
+        </Form>
       </div>
     );
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+    <Form {...signUpForm}>
+      <form onSubmit={signUpForm.handleSubmit(onSignUpSubmit)} className="space-y-6">
         <FormField
-          control={form.control}
+          control={signUpForm.control}
           name="fullName"
           render={({ field }) => (
             <FormItem>
@@ -104,7 +195,7 @@ const SignUpForm = () => {
         />
         
         <FormField
-          control={form.control}
+          control={signUpForm.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -118,7 +209,7 @@ const SignUpForm = () => {
         />
         
         <FormField
-          control={form.control}
+          control={signUpForm.control}
           name="password"
           render={({ field }) => (
             <FormItem>
