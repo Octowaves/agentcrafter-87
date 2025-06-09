@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16">
+    <footer className="bg-gray-950 text-white py-16">
       <div className="container px-4 mx-auto">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
           <div className="lg:max-w-md">
@@ -102,7 +102,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
             © {currentYear} Agentcrafter AI. All rights reserved.
           </p>

@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 
 const FinalCtaSection = () => {
   return (
-    <section className="py-16 bg-gradient-to-br from-chakra-gray-900 via-chakra-blue-900 to-purple-900 text-white relative overflow-hidden">
+    <section className="py-16 bg-gradient-to-b from-chakra-blue-900 via-purple-900 to-gray-950 text-white relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-x-48 -translate-y-48"></div>
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl translate-x-40 translate-y-40"></div>
