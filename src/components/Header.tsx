@@ -23,25 +23,25 @@ const Header = () => {
   
   const navLinks = [
     { name: 'Features', href: '#features' },
-    { name: 'How It Works', href: '#how-it-works' },
+    { name: 'Pricing', href: '#pricing' },
     { name: 'FAQ', href: '#faq' },
   ];
   
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-sm border-b border-gray-100' : 'bg-transparent'
+        isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200' : 'bg-transparent'
       }`}
     >
       <div className="container px-4 mx-auto">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
                 A
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                Agentcrafter
+              <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                Agent Crafter
               </span>
             </Link>
           </div>
@@ -51,7 +51,7 @@ const Header = () => {
               <a 
                 key={link.name}
                 href={link.href}
-                className="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200 relative group"
+                className="text-gray-600 hover:text-blue-600 font-medium text-lg transition-colors duration-200 relative group"
               >
                 {link.name}
                 <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
@@ -62,7 +62,7 @@ const Header = () => {
           <div className="hidden md:block">
             {user ? (
               <Link to="/dashboard">
-                <AgentCrafterButton className="shadow-lg">
+                <AgentCrafterButton className="shadow-lg text-lg px-6 py-3">
                   Dashboard
                 </AgentCrafterButton>
               </Link>
@@ -92,7 +92,7 @@ const Header = () => {
                 <a 
                   key={link.name}
                   href={link.href}
-                  className="text-gray-600 hover:text-blue-600 font-medium py-2 transition-colors"
+                  className="text-gray-600 hover:text-blue-600 font-medium py-2 text-lg transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
@@ -104,7 +104,7 @@ const Header = () => {
                   className="w-full"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <AgentCrafterButton className="w-full">
+                  <AgentCrafterButton className="w-full text-lg py-3">
                     Dashboard
                   </AgentCrafterButton>
                 </Link>
@@ -115,14 +115,14 @@ const Header = () => {
                     className="w-full" 
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Button variant="outline" className="w-full">Sign In</Button>
+                    <Button variant="outline" className="w-full text-lg py-3">Sign In</Button>
                   </Link>
                   <Link 
                     to="/sign-up" 
                     className="w-full"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Button className="w-full">Get Started Free</Button>
+                    <Button className="w-full text-lg py-3">Get Started Free</Button>
                   </Link>
                 </div>
               )}

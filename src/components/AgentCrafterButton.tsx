@@ -26,9 +26,9 @@ const AgentCrafterButton = ({
   };
   
   const sizes = {
-    default: 'h-11 px-6 py-2 text-sm',
+    default: 'h-11 px-6 py-2 text-base',
     sm: 'h-9 px-4 py-1 text-sm',
-    lg: 'h-14 px-8 py-3 text-base',
+    lg: 'h-14 px-8 py-3 text-lg',
   };
   
   return (

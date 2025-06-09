@@ -94,6 +94,7 @@
   body {
     @apply bg-background text-foreground font-inter;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    line-height: 1.6;
   }
 
   /* Custom background grid pattern */
@@ -110,7 +111,7 @@
   }
   
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-28 lg:py-32;
   }
   
   .glass {
@@ -137,7 +138,7 @@
   @keyframes fade-in {
     0% {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
     }
     100% {
       opacity: 1;
@@ -148,7 +149,7 @@
   @keyframes fade-in-delayed {
     0%, 40% {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
     }
     100% {
       opacity: 1;
@@ -165,5 +166,21 @@
       opacity: 1;
       transform: translateX(0);
     }
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+    line-height: 1.2;
+  }
+
+  /* Better button transitions */
+  button {
+    @apply transition-all duration-200;
   }
 }

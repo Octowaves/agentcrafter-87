@@ -1,58 +1,68 @@
 
 import React from 'react';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, Sparkles } from 'lucide-react';
 import AgentCrafterButton from './AgentCrafterButton';
 
 const PricingSection = () => {
   const features = [
-    "Unlimited prompt generations",
-    "Save prompt history", 
-    "Export to any LLM platform",
-    "Community support",
-    "Always free"
+    "Access to Agent Prompter tool",
+    "Ready-made templates for common agent types", 
+    "Export prompts to any LLM platform",
+    "Save and organize your prompt library",
+    "Community support and resources",
+    "Regular updates and new features"
   ];
 
   return (
-    <section className="section-padding" id="pricing">
+    <section className="section-padding bg-gradient-to-b from-blue-50/30 to-white" id="pricing">
       <div className="container px-4 mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-          Free Forever
-        </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Start creating expert AI prompts completely free. No hidden costs, no subscriptions.
-        </p>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            Free Forever
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
+            Start creating expert AI prompts completely free. No hidden costs, no subscriptions, no credit card required.
+          </p>
+        </div>
         
-        <div className="max-w-md mx-auto">
-          <div className="bg-white rounded-2xl overflow-hidden border border-prompter-100 shadow-lg animate-fade-in">
-            <div className="bg-prompter-600 text-white py-6 px-8 text-center">
-              <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2">
+        <div className="max-w-lg mx-auto">
+          <div className="bg-white rounded-3xl overflow-hidden border-2 border-blue-200 shadow-2xl animate-fade-in transform hover:scale-105 transition-transform duration-300">
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8 px-10 text-center relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
+              <span className="inline-block px-4 py-2 bg-white/20 rounded-full text-sm font-bold mb-4 relative z-10">
+                <Sparkles className="w-4 h-4 inline mr-2" />
                 ALWAYS FREE
               </span>
-              <h3 className="text-2xl font-bold mb-1">Free Plan</h3>
-              <div className="flex items-center justify-center">
-                <span className="text-4xl font-bold">$0</span>
-                <span className="text-lg ml-1">/forever</span>
+              <h3 className="text-3xl md:text-4xl font-bold mb-2 relative z-10">Free Plan</h3>
+              <div className="flex items-center justify-center relative z-10">
+                <span className="text-5xl md:text-6xl font-bold">$0</span>
+                <span className="text-xl ml-2">/forever</span>
               </div>
             </div>
             
-            <div className="p-8">
-              <ul className="space-y-4 mb-8">
+            <div className="p-10">
+              <ul className="space-y-5 mb-10">
                 {features.map((feature, index) => (
-                  <li key={index} className="flex items-center">
-                    <span className="bg-green-100 text-green-600 p-1 rounded-full mr-3">
-                      <Check className="w-4 h-4" />
+                  <li key={index} className="flex items-start">
+                    <span className="bg-green-100 text-green-600 p-2 rounded-full mr-4 mt-1">
+                      <Check className="w-5 h-5" />
                     </span>
-                    <span>{feature}</span>
+                    <span className="text-lg text-gray-700 leading-relaxed">{feature}</span>
                   </li>
                 ))}
               </ul>
               
-              <AgentCrafterButton size="lg" className="w-full" onClick={() => window.location.href = "/sign-up"}>
-                Start Free Now <ArrowRight className="ml-2 h-5 w-5" />
+              <AgentCrafterButton 
+                size="lg" 
+                className="w-full py-4 text-xl font-bold shadow-xl" 
+                onClick={() => window.location.href = "/sign-up"}
+              >
+                Start Building Agents Free <ArrowRight className="ml-3 h-6 w-6" />
               </AgentCrafterButton>
               
-              <p className="text-center text-sm text-gray-500 mt-4">
-                No credit card required
+              <p className="text-center text-lg text-gray-500 mt-6">
+                No credit card required • Start in seconds
               </p>
             </div>
           </div>
