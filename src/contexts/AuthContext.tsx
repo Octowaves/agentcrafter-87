@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Session, User } from '@supabase/supabase-js';
@@ -45,40 +46,62 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     };
 
-    // Set up auth state listener
+    // Handle auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, currentSession) => {
+      async (event, currentSession) => {
         console.log('Auth state changed:', event, currentSession);
         setSession(currentSession);
         setUser(currentSession?.user ?? null);
         
-        if (currentSession?.user) {
+        if (event === 'SIGNED_IN' && currentSession?.user) {
+          // Show success message for email confirmation
+          if (currentSession.user.email_confirmed_at) {
+            toast({
+              title: "Email verified successfully!",
+              description: "Welcome to Agentcrafter. Please complete your profile to continue.",
+            });
+          }
+          
           // Use setTimeout to prevent potential deadlocks
           setTimeout(() => {
             fetchProfile(currentSession.user.id);
           }, 0);
-        } else {
+          
+          // Redirect to dashboard
+          navigate('/dashboard');
+        } else if (event === 'SIGNED_OUT') {
           setProfile(null);
         }
       }
     );
 
-    // Check for initial session
-    supabase.auth.getSession().then(({ data: { session: initialSession } }) => {
-      setSession(initialSession);
-      setUser(initialSession?.user ?? null);
-      
-      if (initialSession?.user) {
-        fetchProfile(initialSession.user.id);
+    // Check for initial session and handle URL fragments
+    const handleInitialAuth = async () => {
+      try {
+        // First, try to get session from URL (for email confirmation)
+        const { data, error } = await supabase.auth.getSession();
+        
+        if (data.session) {
+          setSession(data.session);
+          setUser(data.session.user);
+          
+          if (data.session.user) {
+            await fetchProfile(data.session.user.id);
+          }
+        }
+      } catch (error) {
+        console.error('Error getting initial session:', error);
+      } finally {
+        setIsLoading(false);
       }
-      
-      setIsLoading(false);
-    });
+    };
+
+    handleInitialAuth();
 
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [navigate, toast]);
 
   const signUp = async (email: string, password: string, fullName: string) => {
     try {
