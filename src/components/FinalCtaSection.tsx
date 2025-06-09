@@ -1,6 +1,6 @@
 
 import React from 'react';
-import PrompterButton from './PrompterButton';
+import AgentCrafterButton from './AgentCrafterButton';
 import { ArrowRight } from 'lucide-react';
 
 const FinalCtaSection = () => {
@@ -8,22 +8,22 @@ const FinalCtaSection = () => {
     <section className="py-20 bg-gradient-to-r from-prompter-600 to-prompter-800 text-white">
       <div className="container px-4 mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in">
-          Ready to Save Hours and Get Better Results from Your AI?
+          ✨ Sign Up Today
         </h2>
         <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto animate-fade-in-delayed">
-          Join hundreds of developers, marketers and automation experts who are creating perfect prompts in minutes.
+          Start building intelligent agents with structure, clarity, and confidence.
         </p>
         <div className="mb-8 animate-fade-in-delayed">
-          <PrompterButton 
+          <AgentCrafterButton 
             className="bg-white text-prompter-700 hover:bg-gray-100"
             size="lg"
             onClick={() => window.location.href = "/sign-up"}
           >
-            Start Free Now <ArrowRight className="ml-2 h-5 w-5" />
-          </PrompterButton>
+            Create Free Account <ArrowRight className="ml-2 h-5 w-5" />
+          </AgentCrafterButton>
         </div>
         <p className="text-sm opacity-75 animate-fade-in-delayed">
-          Built for builders. Powered by AI. Always free.
+          No credit card needed • Explore the demo to see how it works
         </p>
       </div>
     </section>

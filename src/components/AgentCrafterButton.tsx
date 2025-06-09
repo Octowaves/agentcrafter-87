@@ -10,7 +10,7 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-const PrompterButton = ({
+const AgentCrafterButton = ({
   children,
   variant = 'primary',
   size = 'default',
@@ -41,4 +41,4 @@ const PrompterButton = ({
   );
 };
 
-export default PrompterButton;
+export default AgentCrafterButton;

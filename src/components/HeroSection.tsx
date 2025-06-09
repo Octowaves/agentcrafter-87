@@ -1,6 +1,6 @@
 
 import React from 'react';
-import PrompterButton from './PrompterButton';
+import AgentCrafterButton from './AgentCrafterButton';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
 const HeroSection = () => {
@@ -17,31 +17,34 @@ const HeroSection = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-4 py-2 mb-8 shadow-sm">
               <Sparkles className="w-4 h-4 text-blue-600" />
-              <span className="text-sm font-medium text-gray-700">AI-Powered Prompt Engineering</span>
+              <span className="text-sm font-medium text-gray-700">🧠 Agent Crafter</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold leading-tight text-gray-900 mb-8 animate-fade-in">
-              Craft Perfect{' '}
+              The Ultimate Toolkit for{' '}
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-                AI Prompts
-              </span>{' '}
-              in Minutes
+                AI Agent Developers
+              </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-delayed">
-              Stop struggling with prompt engineering. Agentcrafter is your AI sidekick that creates optimized prompts for your agents — no guesswork, just results.
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-delayed">
+              Craft intelligent, reliable AI agents faster—with purpose-built tools made for developers like you.
             </p>
             
+            <div className="text-lg text-gray-700 mb-12 font-medium animate-fade-in-delayed">
+              "Stop wasting time on broken prompts and confusing logic. Start crafting agents that actually work."
+            </div>
+            
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delayed">
-              <PrompterButton 
+              <AgentCrafterButton 
                 size="lg" 
                 onClick={() => window.location.href = "/sign-up"}
                 className="px-8 py-4 text-lg font-semibold shadow-xl"
               >
-                Start Building Free <ArrowRight className="ml-2 h-5 w-5" />
-              </PrompterButton>
+                Create Free Account <ArrowRight className="ml-2 h-5 w-5" />
+              </AgentCrafterButton>
               <div className="text-sm text-gray-500">
-                No credit card required • 100% free to start
+                No credit card needed • Explore the demo
               </div>
             </div>
           </div>
@@ -56,7 +59,7 @@ const HeroSection = () => {
                     <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                     <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                   </div>
-                  <div className="mx-auto text-sm font-medium text-gray-500">Agentcrafter AI Assistant</div>
+                  <div className="mx-auto text-sm font-medium text-gray-500">Agent Crafter AI Assistant</div>
                 </div>
                 <div className="space-y-4 text-left">
                   <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">

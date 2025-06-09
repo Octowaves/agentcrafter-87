@@ -1,12 +1,12 @@
 
 import React from 'react';
 import { Check, ArrowRight } from 'lucide-react';
-import PrompterButton from './PrompterButton';
+import AgentCrafterButton from './AgentCrafterButton';
 
 const PricingSection = () => {
   const features = [
     "Unlimited prompt generations",
-    "Save prompt history",
+    "Save prompt history", 
     "Export to any LLM platform",
     "Community support",
     "Always free"
@@ -47,9 +47,9 @@ const PricingSection = () => {
                 ))}
               </ul>
               
-              <PrompterButton size="lg" className="w-full" onClick={() => window.location.href = "/sign-up"}>
+              <AgentCrafterButton size="lg" className="w-full" onClick={() => window.location.href = "/sign-up"}>
                 Start Free Now <ArrowRight className="ml-2 h-5 w-5" />
-              </PrompterButton>
+              </AgentCrafterButton>
               
               <p className="text-center text-sm text-gray-500 mt-4">
                 No credit card required

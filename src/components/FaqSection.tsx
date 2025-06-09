@@ -13,8 +13,8 @@ const FaqSection = () => {
       answer: "Once you've used all 100 prompts in your monthly allocation, you'll need to wait until your next billing cycle for your allocation to reset. We'll soon be introducing higher-tier plans with more generations for power users."
     },
     {
-      question: "Will Prompter work with my N8N setup?",
-      answer: "Yes! Prompter generates prompts that work with any LLM-based system. You can use our prompts with N8N, Make.com, Zapier, OpenAI's API, HuggingFace models, or any other platform that accepts text prompts."
+      question: "Will Agent Crafter work with my N8N setup?",
+      answer: "Yes! Agent Crafter generates prompts that work with any LLM-based system. You can use our prompts with N8N, Make.com, Zapier, OpenAI's API, HuggingFace models, or any other platform that accepts text prompts."
     },
     {
       question: "Can I upgrade later?",
@@ -22,7 +22,7 @@ const FaqSection = () => {
     },
     {
       question: "Is this beginner friendly?",
-      answer: "Definitely! Prompter was designed specifically to help users who aren't prompt engineering experts. Our guided conversation approach makes it easy for beginners to create effective prompts without any specialized knowledge."
+      answer: "Definitely! Agent Crafter was designed specifically to help users who aren't prompt engineering experts. Our guided conversation approach makes it easy for beginners to create effective prompts without any specialized knowledge."
     }
   ];
 
