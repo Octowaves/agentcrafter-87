@@ -39,17 +39,17 @@ const Dashboard = () => {
     );
   }
 
-  // If user hasn't confirmed their email, show message to check signup form
+  // If user hasn't confirmed their email, show message to check email
   if (user && !user.email_confirmed_at) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
           <h2 className="text-2xl font-semibold mb-4">Please verify your email</h2>
           <p className="text-gray-600 mb-4">
-            Please complete the email verification process from the signup form.
+            We've sent you a confirmation link. Please check your email and click the link to verify your account.
           </p>
           <p className="text-sm text-gray-500">
-            Check your email for the 6-digit verification code.
+            After clicking the link, you'll be automatically redirected to the dashboard.
           </p>
         </div>
       </div>

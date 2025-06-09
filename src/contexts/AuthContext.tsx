@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Session, User } from '@supabase/supabase-js';
@@ -14,7 +15,6 @@ type AuthContextType = {
   signOut: () => Promise<void>;
   forgotPassword: (email: string) => Promise<{ error: any }>;
   updateProfile: (data: any) => Promise<{ error: any }>;
-  verifyOTP: (email: string, otp: string) => Promise<{ error: any }>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -111,27 +111,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           data: {
             full_name: fullName,
           },
+          emailRedirectTo: `${window.location.origin}/dashboard`,
         },
       });
       
       return { error };
     } catch (error) {
       console.error('Error during sign up:', error);
-      return { error };
-    }
-  };
-
-  const verifyOTP = async (email: string, otp: string) => {
-    try {
-      const { error } = await supabase.auth.verifyOtp({
-        email,
-        token: otp,
-        type: 'signup',
-      });
-      
-      return { error };
-    } catch (error) {
-      console.error('Error during OTP verification:', error);
       return { error };
     }
   };
@@ -213,7 +199,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signOut,
     forgotPassword,
     updateProfile,
-    verifyOTP,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
