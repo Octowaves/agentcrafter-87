@@ -17,18 +17,18 @@ const AgentCrafterButton = ({
   className,
   onClick,
 }: ButtonProps) => {
-  const baseStyles = 'inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50 transform hover:scale-105 active:scale-95';
+  const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chakra-blue-500 focus-visible:ring-offset-2 disabled:opacity-50 transform hover:scale-105 active:scale-95 cursor-pointer';
   
   const variants = {
-    primary: 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl shadow-blue-500/25',
-    secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200 shadow-md hover:shadow-lg',
-    outline: 'border-2 border-gray-200 bg-white text-gray-900 hover:bg-gray-50 hover:border-gray-300 shadow-sm hover:shadow-md',
+    primary: 'bg-chakra-blue-500 text-white hover:bg-chakra-blue-600 shadow-chakra-md hover:shadow-chakra-lg',
+    secondary: 'bg-chakra-gray-100 text-chakra-gray-800 hover:bg-chakra-gray-200 shadow-chakra-sm hover:shadow-chakra-md border border-chakra-gray-200',
+    outline: 'border border-chakra-gray-300 bg-white text-chakra-gray-700 hover:bg-chakra-gray-50 shadow-chakra-sm hover:shadow-chakra-md',
   };
   
   const sizes = {
-    default: 'h-11 px-6 py-2 text-base',
-    sm: 'h-9 px-4 py-1 text-sm',
-    lg: 'h-14 px-8 py-3 text-lg',
+    default: 'h-10 px-4 py-2 text-sm',
+    sm: 'h-8 px-3 py-1 text-xs',
+    lg: 'h-12 px-6 py-3 text-base',
   };
   
   return (

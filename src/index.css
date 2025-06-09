@@ -7,35 +7,37 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 100%;
+    --foreground: 210 10% 23%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 10% 23%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 10% 23%;
 
-    --primary: 204 80% 45%;
-    --primary-foreground: 210 40% 98%;
+    /* Chakra UI inspired primary colors - Blue */
+    --primary: 213 94% 68%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Chakra UI inspired secondary colors - Gray */
+    --secondary: 210 17% 98%;
+    --secondary-foreground: 210 10% 23%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 210 17% 98%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 17% 98%;
+    --accent-foreground: 210 10% 23%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 213 94% 68%;
 
-    --radius: 1rem;
+    --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -44,45 +46,69 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 213 94% 68%;
+
+    /* Chakra UI inspired colors */
+    --chakra-blue-50: 214 100% 97%;
+    --chakra-blue-100: 213 97% 87%;
+    --chakra-blue-200: 212 96% 78%;
+    --chakra-blue-300: 211 96% 68%;
+    --chakra-blue-400: 213 94% 68%;
+    --chakra-blue-500: 217 91% 60%;
+    --chakra-blue-600: 221 83% 53%;
+    --chakra-blue-700: 224 76% 48%;
+    --chakra-blue-800: 226 71% 40%;
+    --chakra-blue-900: 224 64% 33%;
+
+    --chakra-gray-50: 0 0% 98%;
+    --chakra-gray-100: 240 5% 96%;
+    --chakra-gray-200: 240 6% 90%;
+    --chakra-gray-300: 240 5% 84%;
+    --chakra-gray-400: 240 5% 65%;
+    --chakra-gray-500: 240 4% 46%;
+    --chakra-gray-600: 240 5% 34%;
+    --chakra-gray-700: 240 5% 26%;
+    --chakra-gray-800: 240 4% 16%;
+    --chakra-gray-900: 240 6% 10%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 224 71% 4%;
+    --foreground: 210 20% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 224 71% 4%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 20% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 213 94% 68%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 210 20% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 217.9 10.6% 64.9%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 215 28% 17%;
+    --accent-foreground: 210 20% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 20% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 213 94% 68%;
+
+    --sidebar-background: 240 6% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 213 94% 68%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 213 94% 68%;
   }
 }
 
@@ -97,10 +123,9 @@
     line-height: 1.6;
   }
 
-  /* Custom background grid pattern */
+  /* Chakra UI inspired background patterns */
   .bg-grid-pattern {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(66, 153, 225, 0.1) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 }
@@ -111,34 +136,51 @@
   }
   
   .section-padding {
-    @apply py-20 md:py-28 lg:py-32;
+    @apply py-16 md:py-20 lg:py-24;
   }
   
   .glass {
-    @apply bg-white/60 backdrop-blur-md border border-white/20 shadow-lg;
+    @apply bg-white/80 backdrop-blur-md border border-white/30 shadow-xl;
   }
   
   .card-gradient {
-    @apply bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 shadow-md;
+    @apply bg-white shadow-md border border-gray-200;
   }
 
-  /* Enhanced animations */
+  /* Chakra UI inspired shadow utilities */
+  .shadow-chakra-sm {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-chakra-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-chakra-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .shadow-chakra-xl {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Enhanced animations with Chakra UI feel */
   .animate-fade-in {
-    animation: fade-in 0.8s ease-out;
+    animation: fade-in 0.6s ease-out;
   }
 
   .animate-fade-in-delayed {
-    animation: fade-in-delayed 1.2s ease-out;
+    animation: fade-in-delayed 1s ease-out;
   }
 
   .animate-slide-in-right {
-    animation: slide-in-right 0.8s ease-out;
+    animation: slide-in-right 0.6s ease-out;
   }
 
   @keyframes fade-in {
     0% {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     100% {
       opacity: 1;
@@ -147,9 +189,9 @@
   }
 
   @keyframes fade-in-delayed {
-    0%, 40% {
+    0%, 30% {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     100% {
       opacity: 1;
@@ -160,7 +202,7 @@
   @keyframes slide-in-right {
     0% {
       opacity: 0;
-      transform: translateX(50px);
+      transform: translateX(30px);
     }
     100% {
       opacity: 1;
@@ -173,14 +215,21 @@
     scroll-behavior: smooth;
   }
 
-  /* Enhanced typography */
+  /* Chakra UI inspired typography */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+    @apply font-semibold;
     line-height: 1.2;
   }
 
-  /* Better button transitions */
+  /* Better button transitions with Chakra UI feel */
   button {
     @apply transition-all duration-200;
   }
+
+  /* Chakra UI spacing utilities */
+  .space-chakra-xs { @apply space-y-1; }
+  .space-chakra-sm { @apply space-y-2; }
+  .space-chakra-md { @apply space-y-4; }
+  .space-chakra-lg { @apply space-y-6; }
+  .space-chakra-xl { @apply space-y-8; }
 }

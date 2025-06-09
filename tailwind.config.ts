@@ -57,18 +57,32 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				prompter: {
-					50: '#f0f9ff',
-					100: '#e0f2fe',
-					200: '#bae6fd',
-					300: '#7dd3fc',
-					400: '#38bdf8',
-					500: '#0ea5e9',
-					600: '#0284c7',
-					700: '#0369a1',
-					800: '#075985',
-					900: '#0c4a6e',
-					950: '#082f49',
+				// Chakra UI inspired color palette
+				chakra: {
+					blue: {
+						50: 'hsl(var(--chakra-blue-50))',
+						100: 'hsl(var(--chakra-blue-100))',
+						200: 'hsl(var(--chakra-blue-200))',
+						300: 'hsl(var(--chakra-blue-300))',
+						400: 'hsl(var(--chakra-blue-400))',
+						500: 'hsl(var(--chakra-blue-500))',
+						600: 'hsl(var(--chakra-blue-600))',
+						700: 'hsl(var(--chakra-blue-700))',
+						800: 'hsl(var(--chakra-blue-800))',
+						900: 'hsl(var(--chakra-blue-900))',
+					},
+					gray: {
+						50: 'hsl(var(--chakra-gray-50))',
+						100: 'hsl(var(--chakra-gray-100))',
+						200: 'hsl(var(--chakra-gray-200))',
+						300: 'hsl(var(--chakra-gray-300))',
+						400: 'hsl(var(--chakra-gray-400))',
+						500: 'hsl(var(--chakra-gray-500))',
+						600: 'hsl(var(--chakra-gray-600))',
+						700: 'hsl(var(--chakra-gray-700))',
+						800: 'hsl(var(--chakra-gray-800))',
+						900: 'hsl(var(--chakra-gray-900))',
+					}
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
@@ -86,6 +100,21 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+			// Chakra UI inspired spacing
+			spacing: {
+				'18': '4.5rem',
+				'88': '22rem',
+				'128': '32rem',
+			},
+			// Chakra UI inspired font sizes
+			fontSize: {
+				'2xs': ['0.625rem', { lineHeight: '1rem' }],
+				'3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+				'4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+				'5xl': ['3rem', { lineHeight: '1' }],
+				'6xl': ['3.75rem', { lineHeight: '1' }],
+				'7xl': ['4.5rem', { lineHeight: '1' }],
+			},
 			keyframes: {
 				'accordion-down': {
 					from: { height: '0' },
@@ -96,35 +125,41 @@ export default {
 					to: { height: '0' }
 				},
 				'fade-in': {
-					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
 					'100%': { opacity: '1', transform: 'translateY(0)' }
 				},
 				'fade-in-delayed': {
-					'0%': { opacity: '0', transform: 'translateY(10px)' },
-					'30%': { opacity: '0', transform: 'translateY(10px)' },
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'30%': { opacity: '0', transform: 'translateY(20px)' },
 					'100%': { opacity: '1', transform: 'translateY(0)' }
 				},
 				'slide-in-right': {
-					'0%': { transform: 'translateX(100%)' },
-					'100%': { transform: 'translateX(0)' }
+					'0%': { transform: 'translateX(30px)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' }
 				},
 				'slide-in-left': {
-					'0%': { transform: 'translateX(-100%)' },
-					'100%': { transform: 'translateX(0)' }
+					'0%': { transform: 'translateX(-30px)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' }
 				},
 				floating: {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-10px)' }
+				},
+				// Chakra UI inspired animations
+				'scale-in': {
+					'0%': { transform: 'scale(0.95)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.7s ease-out',
+				'fade-in': 'fade-in 0.6s ease-out',
 				'fade-in-delayed': 'fade-in-delayed 1s ease-out',
-				'slide-in-right': 'slide-in-right 0.5s ease-out',
-				'slide-in-left': 'slide-in-left 0.5s ease-out',
-				'floating': 'floating 3s ease-in-out infinite'
+				'slide-in-right': 'slide-in-right 0.6s ease-out',
+				'slide-in-left': 'slide-in-left 0.6s ease-out',
+				'floating': 'floating 3s ease-in-out infinite',
+				'scale-in': 'scale-in 0.3s ease-out'
 			}
 		}
 	},
