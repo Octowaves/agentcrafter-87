@@ -1,7 +1,7 @@
 
 import React from 'react';
 import AgentCrafterButton from './AgentCrafterButton';
-import { ArrowRight, Bot, Zap } from 'lucide-react';
+import { ArrowRight, Bot, Zap, Target, BookOpen, Users, Newspaper } from 'lucide-react';
 
 const HeroSection = () => {
   return (
@@ -59,29 +59,45 @@ const HeroSection = () => {
                     <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                     <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                   </div>
-                  <div className="mx-auto text-base font-semibold text-chakra-gray-700">Agent Crafter AI Assistant</div>
+                  <div className="mx-auto text-base font-semibold text-chakra-gray-700">Agent Crafter Dashboard</div>
                 </div>
-                <div className="space-y-4 text-left">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                   <div className="bg-white p-4 rounded-lg shadow-chakra-sm border border-chakra-gray-200">
-                    <p className="text-chakra-gray-700 text-sm font-medium">What type of AI agent are you building?</p>
-                  </div>
-                  <div className="bg-gradient-to-r from-chakra-blue-50 to-chakra-blue-100 p-4 rounded-lg shadow-chakra-sm ml-8 border border-chakra-blue-200">
-                    <p className="text-chakra-gray-800 text-sm">A customer service chatbot for e-commerce returns and refunds</p>
-                  </div>
-                  <div className="bg-white p-4 rounded-lg shadow-chakra-sm border border-chakra-gray-200">
-                    <p className="text-chakra-gray-700 text-sm font-medium">What platform will you use?</p>
-                  </div>
-                  <div className="bg-gradient-to-r from-chakra-blue-50 to-chakra-blue-100 p-4 rounded-lg shadow-chakra-sm ml-8 border border-chakra-blue-200">
-                    <p className="text-chakra-gray-800 text-sm">Zapier with OpenAI GPT-4</p>
-                  </div>
-                  <div className="bg-gradient-to-r from-green-50 to-chakra-blue-50 p-4 rounded-lg shadow-chakra-sm border border-green-200">
                     <div className="flex items-center gap-2 mb-2">
-                      <Zap className="w-4 h-4 text-green-600" />
-                      <p className="text-chakra-gray-700 text-sm font-medium">Generating your optimized prompt...</p>
+                      <Target className="w-4 h-4 text-chakra-blue-600" />
+                      <p className="text-chakra-gray-700 text-sm font-medium">Accuracy-Built Tools</p>
                     </div>
-                    <div className="h-2 bg-chakra-gray-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-chakra-blue-500 to-green-500 rounded-full animate-pulse w-4/5"></div>
+                    <p className="text-chakra-gray-600 text-xs">Precision-engineered prompt generators and testing frameworks</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-chakra-sm border border-chakra-gray-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <BookOpen className="w-4 h-4 text-green-600" />
+                      <p className="text-chakra-gray-700 text-sm font-medium">Curated Resources</p>
                     </div>
+                    <p className="text-chakra-gray-600 text-xs">Expert-vetted templates and best practices library</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-chakra-sm border border-chakra-gray-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Users className="w-4 h-4 text-purple-600" />
+                      <p className="text-chakra-gray-700 text-sm font-medium">Community Support</p>
+                    </div>
+                    <p className="text-chakra-gray-600 text-xs">Connect with AI developers and share knowledge</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-chakra-sm border border-chakra-gray-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Newspaper className="w-4 h-4 text-orange-600" />
+                      <p className="text-chakra-gray-700 text-sm font-medium">Latest AI Agent News</p>
+                    </div>
+                    <p className="text-chakra-gray-600 text-xs">Stay updated with industry trends and breakthroughs</p>
+                  </div>
+                </div>
+                <div className="mt-4 bg-gradient-to-r from-green-50 to-chakra-blue-50 p-4 rounded-lg shadow-chakra-sm border border-green-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Zap className="w-4 h-4 text-green-600" />
+                    <p className="text-chakra-gray-700 text-sm font-medium">Ready to build your next AI agent?</p>
+                  </div>
+                  <div className="h-2 bg-chakra-gray-200 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-chakra-blue-500 to-green-500 rounded-full animate-pulse w-4/5"></div>
                   </div>
                 </div>
               </div>

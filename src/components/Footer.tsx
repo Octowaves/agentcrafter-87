@@ -83,8 +83,8 @@ const Footer = () => {
               <h4 className="text-lg font-semibold mb-6 text-white">Support</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="mailto:hello@agentcrafter.ai" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                    hello@agentcrafter.ai
+                  <a href="mailto:info.deekshithkr@gmail.com" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
+                    info.deekshithkr@gmail.com
                   </a>
                 </li>
                 <li>
