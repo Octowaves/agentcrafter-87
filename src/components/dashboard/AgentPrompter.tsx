@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -159,16 +160,51 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center space-x-4">
-        <Button variant="outline" onClick={onBack} className="flex items-center">
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Tools
-        </Button>
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Agent Prompter</h1>
-          <p className="text-gray-600">Transform your rough ideas into polished, effective prompts</p>
+    <div className="space-y-8">
+      {/* Enhanced Header */}
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 rounded-2xl opacity-50"></div>
+        <div className="relative bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-8 shadow-lg">
+          <div className="flex items-start justify-between mb-6">
+            <Button 
+              variant="outline" 
+              onClick={onBack} 
+              className="flex items-center hover:bg-blue-50 hover:border-blue-300 transition-all duration-200"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Tools
+            </Button>
+          </div>
+          
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-4">
+              <Sparkles className="h-8 w-8 text-white" />
+            </div>
+            
+            <div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-3">
+                Agent Prompter
+              </h1>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Transform your rough ideas into polished, effective prompts that deliver consistent results
+              </p>
+            </div>
+            
+            <div className="flex items-center justify-center space-x-6 text-sm text-gray-500 pt-4">
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                AI-Powered Generation
+              </div>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                Ready-to-Use Prompts
+              </div>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                Export & Share
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
