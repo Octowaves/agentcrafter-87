@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Session, User } from '@supabase/supabase-js';
@@ -54,8 +53,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(currentSession?.user ?? null);
         
         if (event === 'SIGNED_IN' && currentSession?.user) {
-          // Show success message for email confirmation
-          if (currentSession.user.email_confirmed_at) {
+          // Only show email verification success for actual email confirmations
+          // Check if this is coming from an email confirmation link
+          const urlParams = new URLSearchParams(window.location.search);
+          const isEmailConfirmation = urlParams.has('token_hash') || urlParams.has('type');
+          
+          if (isEmailConfirmation && currentSession.user.email_confirmed_at) {
             toast({
               title: "Email verified successfully!",
               description: "Welcome to Agentcrafter. Please complete your profile to continue.",
