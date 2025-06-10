@@ -16,7 +16,7 @@ const SignUp = () => {
   return (
     <AuthLayout 
       title="Create your free account" 
-      description="Sign up for Agentcrafter and start crafting perfect prompts"
+      description="Craft intelligent, reliable AI agents faster"
       footer={
         <div className="text-center mt-4">
           Already have an account?{' '}

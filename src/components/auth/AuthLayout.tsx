@@ -16,8 +16,10 @@ const AuthLayout = ({ children, title, description, footer }: AuthLayoutProps) =
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Link to="/" className="inline-flex items-center gap-2">
-            <div className="w-8 h-8 bg-prompter-600 rounded-lg flex items-center justify-center text-white font-bold">P</div>
-            <span className="text-2xl font-bold text-gray-900">Prompter</span>
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              A
+            </div>
+            <span className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Agent Crafter</span>
           </Link>
         </div>
         
