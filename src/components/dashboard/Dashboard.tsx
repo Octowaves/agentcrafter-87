@@ -15,12 +15,14 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!isLoading && user) {
-      // Only show user details form if profile is missing required fields
+      // Check if profile exists and has required fields
       if (profile) {
-        const hasRequiredFields = profile.full_name && 
-                                 profile.email && 
-                                 profile.country && 
-                                 profile.date_of_birth;
+        const hasRequiredFields = Boolean(
+          profile.full_name && 
+          profile.country && 
+          profile.date_of_birth &&
+          profile.details_completed_at
+        );
         setUserDetailsCompleted(hasRequiredFields);
       } else {
         // If no profile exists, user needs to complete details

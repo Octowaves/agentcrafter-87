@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Loader2, ArrowLeft, Sparkles, Copy, Download, AlertCircle, Lightbulb, ExternalLink } from 'lucide-react';
+import { Loader2, ArrowLeft, Sparkles, Copy, Download, AlertCircle, Lightbulb } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
@@ -383,7 +383,7 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
                   </Button>
                 </div>
                 
-                {/* How to Use Section - Right below the generated prompt */}
+                {/* How to Use Section */}
                 <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 mt-6">
                   <CardHeader>
                     <CardTitle className="flex items-center text-blue-900">
@@ -431,30 +431,6 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
                             <li>• Use consistent formatting for better responses</li>
                             <li>• Test with different input scenarios</li>
                           </ul>
-                        </div>
-                        
-                        <div className="bg-white/60 rounded-lg p-4 border border-blue-200">
-                          <h4 className="font-semibold text-blue-900 mb-2">🔗 Popular Platforms</h4>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <a href="https://chat.openai.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded hover:bg-blue-200 transition-colors">
-                              ChatGPT <ExternalLink className="h-3 w-3 ml-1" />
-                            </a>
-                            <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded hover:bg-blue-200 transition-colors">
-                              Claude <ExternalLink className="h-3 w-3 ml-1" />
-                            </a>
-                            <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded hover:bg-blue-200 transition-colors">
-                              Gemini <ExternalLink className="h-3 w-3 ml-1" />
-                            </a>
-                            <a href="https://n8n.io/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded hover:bg-purple-200 transition-colors">
-                              n8n <ExternalLink className="h-3 w-3 ml-1" />
-                            </a>
-                            <a href="https://viasocket.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded hover:bg-purple-200 transition-colors">
-                              ViaSocket <ExternalLink className="h-3 w-3 ml-1" />
-                            </a>
-                            <a href="https://www.make.com/en" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded hover:bg-purple-200 transition-colors">
-                              Make <ExternalLink className="h-3 w-3 ml-1" />
-                            </a>
-                          </div>
                         </div>
                       </div>
                     </div>
