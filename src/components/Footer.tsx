@@ -46,7 +46,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
+                  <a href="#pricing" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
                     Pricing
                   </a>
                 </li>
@@ -107,10 +107,10 @@ const Footer = () => {
             © {currentYear} Agentcrafter AI. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
+            <a href="/privacy" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
               Privacy Policy
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
+            <a href="/terms" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
               Terms of Service
             </a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">

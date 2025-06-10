@@ -12,6 +12,8 @@ import SignIn from "./pages/SignIn";
 import ForgotPassword from "./pages/ForgotPassword";
 import DashboardPage from "./pages/DashboardPage";
 import Settings from "./pages/Settings";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import AuthGuard from "./components/AuthGuard";
 
 const queryClient = new QueryClient();
@@ -25,6 +27,8 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
             
             {/* Public Routes */}
             <Route element={<AuthGuard requireAuth={false} />}>

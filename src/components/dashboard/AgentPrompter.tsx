@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Loader2, ArrowLeft, Sparkles, Copy, Download, AlertCircle } from 'lucide-react';
+import { Loader2, ArrowLeft, Sparkles, Copy, Download, AlertCircle, Lightbulb, ExternalLink } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
@@ -393,6 +392,77 @@ const AgentPrompter = ({ onBack }: AgentPrompterProps) => {
           </CardContent>
         </Card>
       </div>
+
+      {/* How to Use Section - Only show when prompt is generated */}
+      {generatedPrompt && (
+        <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
+          <CardHeader>
+            <CardTitle className="flex items-center text-blue-900">
+              <Lightbulb className="h-5 w-5 mr-2 text-blue-600" />
+              How to Use Your Generated Prompt
+            </CardTitle>
+            <CardDescription className="text-blue-700">
+              Follow these steps to get the best results from your AI agent prompt
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                  <div>
+                    <h4 className="font-semibold text-blue-900">Copy the Prompt</h4>
+                    <p className="text-sm text-blue-800">Use the copy button above to copy your generated prompt to clipboard.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                  <div>
+                    <h4 className="font-semibold text-blue-900">Choose Your Platform</h4>
+                    <p className="text-sm text-blue-800">Paste the prompt into your preferred AI platform (ChatGPT, Claude, Gemini, etc.).</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                  <div>
+                    <h4 className="font-semibold text-blue-900">Test & Refine</h4>
+                    <p className="text-sm text-blue-800">Start with simple queries to test your agent, then gradually increase complexity.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="bg-white/60 rounded-lg p-4 border border-blue-200">
+                  <h4 className="font-semibold text-blue-900 mb-2">💡 Pro Tips</h4>
+                  <ul className="text-sm text-blue-800 space-y-1">
+                    <li>• Save successful prompts for future use</li>
+                    <li>• Adjust the prompt based on results</li>
+                    <li>• Use consistent formatting for better responses</li>
+                    <li>• Test with different input scenarios</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-white/60 rounded-lg p-4 border border-blue-200">
+                  <h4 className="font-semibold text-blue-900 mb-2">🔗 Popular Platforms</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <a href="https://chat.openai.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded hover:bg-blue-200 transition-colors">
+                      ChatGPT <ExternalLink className="h-3 w-3 ml-1" />
+                    </a>
+                    <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded hover:bg-blue-200 transition-colors">
+                      Claude <ExternalLink className="h-3 w-3 ml-1" />
+                    </a>
+                    <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded hover:bg-blue-200 transition-colors">
+                      Gemini <ExternalLink className="h-3 w-3 ml-1" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };
