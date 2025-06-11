@@ -85,7 +85,7 @@ serve(async (req) => {
       console.log('New customer created:', customerId)
     }
 
-    // Create Razorpay subscription
+    // Create Razorpay subscription using amount instead of plan
     const subscriptionResponse = await fetch('https://api.razorpay.com/v1/subscriptions', {
       method: 'POST',
       headers: {
@@ -97,14 +97,14 @@ serve(async (req) => {
         total_count: 0, // Infinite subscription
         quantity: 1,
         start_at: Math.floor(Date.now() / 1000), // Start now
-        plan: {
-          interval: 1,
-          period: 'monthly',
-          item: {
-            name: 'Agent Crafter Pro',
-            amount: 59900, // ₹599 in paise (smallest currency unit)
-            currency: 'INR'
-          }
+        // Use amount directly instead of plan structure
+        amount: 59900, // ₹599 in paise (smallest currency unit)
+        currency: 'INR',
+        interval: 1,
+        period: 'monthly',
+        notes: {
+          plan_name: 'Agent Crafter Pro',
+          user_email: user.email
         }
       }),
     })
