@@ -92,18 +92,13 @@ const BillingSettings = () => {
     setIsCancelling(true);
 
     try {
-      // Call your backend to cancel subscription with Razorpay
-      const response = await fetch('/api/cancel-subscription', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const { data, error } = await supabase.functions.invoke('cancel-subscription', {
+        body: {
           user_id: user?.id,
-        }),
+        },
       });
 
-      if (!response.ok) throw new Error('Failed to cancel subscription');
+      if (error) throw error;
 
       toast({
         title: "Subscription Cancelled",

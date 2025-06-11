@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Check, Shield, Star, Zap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 declare global {
   interface Window {
@@ -27,7 +28,9 @@ const Billing = () => {
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
 
@@ -62,21 +65,19 @@ const Billing = () => {
 
     try {
       // Create subscription on your backend
-      const response = await fetch('/api/create-subscription', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const { data, error } = await supabase.functions.invoke('create-subscription', {
+        body: {
           user_id: user.id,
           plan: 'monthly_5_99',
-        }),
+        },
       });
 
-      const { subscription_id, customer_id } = await response.json();
+      if (error) throw error;
+
+      const { subscription_id, customer_id } = data;
 
       const options = {
-        key: 'rzp_test_your_key_here', // Replace with your Razorpay key
+        key: 'rzp_live_FmkiZbac8lwac0', // Your live Razorpay key
         subscription_id: subscription_id,
         name: 'Agent Crafter',
         description: 'Monthly Subscription - $5.99/month',

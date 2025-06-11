@@ -31,13 +31,15 @@ serve(async (req) => {
       throw new Error('Unauthorized')
     }
 
-    // Razorpay API credentials (you'll need to set these as secrets)
+    // Razorpay API credentials
     const razorpayKeyId = Deno.env.get('RAZORPAY_KEY_ID')
     const razorpayKeySecret = Deno.env.get('RAZORPAY_KEY_SECRET')
 
     if (!razorpayKeyId || !razorpayKeySecret) {
       throw new Error('Razorpay credentials not configured')
     }
+
+    console.log('Creating subscription for user:', user.id)
 
     // Create Razorpay customer
     const customerResponse = await fetch('https://api.razorpay.com/v1/customers', {
@@ -52,9 +54,16 @@ serve(async (req) => {
       }),
     })
 
-    const customer = await customerResponse.json()
+    if (!customerResponse.ok) {
+      const errorText = await customerResponse.text()
+      console.error('Razorpay customer creation failed:', errorText)
+      throw new Error('Failed to create customer with Razorpay')
+    }
 
-    // Create Razorpay subscription
+    const customer = await customerResponse.json()
+    console.log('Customer created:', customer.id)
+
+    // Create Razorpay subscription using the provided subscription ID
     const subscriptionResponse = await fetch('https://api.razorpay.com/v1/subscriptions', {
       method: 'POST',
       headers: {
@@ -62,14 +71,21 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        plan_id: 'plan_monthly_5_99', // You'll need to create this plan in Razorpay dashboard
+        plan_id: 'sub_Qfu1PPMT5bC48C', // Your subscription plan ID
         customer_id: customer.id,
         total_count: 0, // Infinite subscription
         quantity: 1,
       }),
     })
 
+    if (!subscriptionResponse.ok) {
+      const errorText = await subscriptionResponse.text()
+      console.error('Razorpay subscription creation failed:', errorText)
+      throw new Error('Failed to create subscription with Razorpay')
+    }
+
     const subscription = await subscriptionResponse.json()
+    console.log('Subscription created:', subscription.id)
 
     // Store subscription in database
     const { error: dbError } = await supabaseClient
@@ -85,8 +101,11 @@ serve(async (req) => {
       })
 
     if (dbError) {
+      console.error('Database error:', dbError)
       throw dbError
     }
+
+    console.log('Subscription stored in database successfully')
 
     return new Response(
       JSON.stringify({
@@ -99,6 +118,7 @@ serve(async (req) => {
       },
     )
   } catch (error) {
+    console.error('Create subscription error:', error)
     return new Response(
       JSON.stringify({ error: error.message }),
       {
