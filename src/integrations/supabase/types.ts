@@ -9,6 +9,42 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      billing_addresses: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          street_address: string | null
+          updated_at: string
+          user_id: string
+          zip_code: string | null
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          street_address?: string | null
+          updated_at?: string
+          user_id: string
+          zip_code?: string | null
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          street_address?: string | null
+          updated_at?: string
+          user_id?: string
+          zip_code?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -19,7 +55,13 @@ export type Database = {
           email: string
           full_name: string | null
           id: string
+          next_billing_date: string | null
+          razorpay_customer_id: string | null
+          razorpay_subscription_id: string | null
+          subscription_active: boolean | null
           subscription_end: string | null
+          subscription_plan: string | null
+          subscription_start_date: string | null
           subscription_status: string | null
           updated_at: string
         }
@@ -32,7 +74,13 @@ export type Database = {
           email: string
           full_name?: string | null
           id: string
+          next_billing_date?: string | null
+          razorpay_customer_id?: string | null
+          razorpay_subscription_id?: string | null
+          subscription_active?: boolean | null
           subscription_end?: string | null
+          subscription_plan?: string | null
+          subscription_start_date?: string | null
           subscription_status?: string | null
           updated_at?: string
         }
@@ -45,7 +93,13 @@ export type Database = {
           email?: string
           full_name?: string | null
           id?: string
+          next_billing_date?: string | null
+          razorpay_customer_id?: string | null
+          razorpay_subscription_id?: string | null
+          subscription_active?: boolean | null
           subscription_end?: string | null
+          subscription_plan?: string | null
+          subscription_start_date?: string | null
           subscription_status?: string | null
           updated_at?: string
         }
@@ -78,12 +132,65 @@ export type Database = {
         }
         Relationships: []
       }
+      subscriptions: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          current_period_end: string | null
+          current_period_start: string | null
+          id: string
+          plan_id: string
+          razorpay_customer_id: string | null
+          razorpay_subscription_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          plan_id?: string
+          razorpay_customer_id?: string | null
+          razorpay_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          plan_id?: string
+          razorpay_customer_id?: string | null
+          razorpay_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      update_subscription_status: {
+        Args: {
+          p_razorpay_subscription_id: string
+          p_status: string
+          p_current_period_start?: string
+          p_current_period_end?: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

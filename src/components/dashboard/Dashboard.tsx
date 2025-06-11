@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { Navigate } from 'react-router-dom';
 import DashboardHeader from './DashboardHeader';
 import AgentPrompter from './AgentPrompter';
 import ToolsGrid from './ToolsGrid';
@@ -42,6 +43,11 @@ const Dashboard = () => {
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
+  }
+
+  // Check subscription status - redirect to billing if not subscribed
+  if (user && profile && !profile.subscription_active) {
+    return <Navigate to="/billing" replace />;
   }
 
   // If user hasn't completed their details, show the form

@@ -9,7 +9,7 @@ const AuthNav = () => {
         <AgentCrafterButton variant="outline">Sign In</AgentCrafterButton>
       </Link>
       <Link to="/sign-up">
-        <AgentCrafterButton>Get Started Free</AgentCrafterButton>
+        <AgentCrafterButton>Start Building - $5.99/month</AgentCrafterButton>
       </Link>
     </div>
   );

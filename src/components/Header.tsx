@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import AgentCrafterButton from './AgentCrafterButton';
@@ -120,7 +121,7 @@ const Header = () => {
                     className="w-full"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <AgentCrafterButton className="w-full text-lg py-3">Get Started Free</AgentCrafterButton>
+                    <AgentCrafterButton className="w-full text-lg py-3">Start Building - $5.99/month</AgentCrafterButton>
                   </Link>
                 </div>
               )}

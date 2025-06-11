@@ -12,6 +12,7 @@ import SignIn from "./pages/SignIn";
 import ForgotPassword from "./pages/ForgotPassword";
 import DashboardPage from "./pages/DashboardPage";
 import Settings from "./pages/Settings";
+import Billing from "./pages/Billing";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import AuthGuard from "./components/AuthGuard";
@@ -41,6 +42,7 @@ const App = () => (
             <Route element={<AuthGuard requireAuth={true} />}>
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/billing" element={<Billing />} />
             </Route>
             
             {/* Catch-all route */}

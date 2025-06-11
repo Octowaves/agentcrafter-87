@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import AccountSettings from './AccountSettings';
 import SecuritySettings from './SecuritySettings';
 import ProfileSettings from './ProfileSettings';
+import BillingSettings from './BillingSettings';
 
 const SettingsLayout = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const SettingsLayout = () => {
     { id: 'account', label: 'Account', component: AccountSettings },
     { id: 'security', label: 'Security', component: SecuritySettings },
     { id: 'profile', label: 'Profile', component: ProfileSettings },
+    { id: 'billing', label: 'Billing', component: BillingSettings },
   ];
 
   const ActiveComponent = tabs.find(tab => tab.id === activeTab)?.component || AccountSettings;

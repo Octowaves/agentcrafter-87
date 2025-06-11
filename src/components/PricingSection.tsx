@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Check, ArrowRight, Sparkles } from 'lucide-react';
+import { Check, ArrowRight, Star } from 'lucide-react';
 import AgentCrafterButton from './AgentCrafterButton';
 
 const PricingSection = () => {
@@ -9,7 +9,7 @@ const PricingSection = () => {
     "Ready-made templates for common agent types", 
     "Export prompts to any LLM platform",
     "Save and organize your prompt library",
-    "Community support and resources",
+    "Priority customer support",
     "Regular updates and new features"
   ];
 
@@ -18,10 +18,10 @@ const PricingSection = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-chakra-gray-900">
-            Free During Beta
+            Simple, Transparent Pricing
           </h2>
           <p className="text-base md:text-lg text-chakra-gray-600 max-w-3xl mx-auto">
-            Start creating expert AI prompts completely free during our beta period. No hidden costs, no subscriptions, no credit card required.
+            Get access to all Agent Crafter features for one low monthly price. No hidden costs, no complicated tiers.
           </p>
         </div>
         
@@ -31,13 +31,13 @@ const PricingSection = () => {
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
               <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full -ml-10 -mb-10"></div>
               <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm font-semibold mb-3 relative z-10">
-                <Sparkles className="w-4 h-4 inline mr-1" />
-                BETA ACCESS
+                <Star className="w-4 h-4 inline mr-1" />
+                PRO PLAN
               </span>
-              <h3 className="text-2xl font-bold mb-2 relative z-10">Beta Plan</h3>
+              <h3 className="text-2xl font-bold mb-2 relative z-10">Pro Plan</h3>
               <div className="flex items-center justify-center relative z-10">
-                <span className="text-4xl font-bold">$0</span>
-                <span className="text-base ml-2">/during beta</span>
+                <span className="text-4xl font-bold">$5.99</span>
+                <span className="text-base ml-2">/month</span>
               </div>
             </div>
             
@@ -58,11 +58,11 @@ const PricingSection = () => {
                 className="w-full py-3 text-base font-semibold shadow-chakra-lg" 
                 onClick={() => window.location.href = "/sign-up"}
               >
-                Start Building Agents Free <ArrowRight className="ml-2 h-4 w-4" />
+                Start Building for $5.99/month <ArrowRight className="ml-2 h-4 w-4" />
               </AgentCrafterButton>
               
               <p className="text-center text-sm text-chakra-gray-500 mt-4">
-                No credit card required • Start in seconds
+                Cancel anytime • Secure payment via Razorpay
                 <br />
                 <a href="/terms" className="text-chakra-blue-600 hover:underline">Terms of Service</a> • <a href="/privacy" className="text-chakra-blue-600 hover:underline">Privacy Policy</a>
               </p>
