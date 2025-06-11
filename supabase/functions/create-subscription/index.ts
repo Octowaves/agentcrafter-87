@@ -115,6 +115,10 @@ serve(async (req) => {
     console.log('Plan created:', planData.id)
 
     // Create Razorpay subscription using the created plan
+    // Add 30 seconds to current time to avoid "start_at cannot be lesser than current time" error
+    const startTime = Math.floor(Date.now() / 1000) + 30
+    console.log('Setting start_at to:', startTime, 'Current time:', Math.floor(Date.now() / 1000))
+
     const subscriptionResponse = await fetch('https://api.razorpay.com/v1/subscriptions', {
       method: 'POST',
       headers: {
@@ -126,7 +130,7 @@ serve(async (req) => {
         customer_id: customerId,
         total_count: 0, // Infinite subscription
         quantity: 1,
-        start_at: Math.floor(Date.now() / 1000), // Start now
+        start_at: startTime,
         notes: {
           plan_name: 'Agent Crafter Pro',
           user_email: user.email
