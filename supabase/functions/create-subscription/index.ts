@@ -85,7 +85,36 @@ serve(async (req) => {
       console.log('New customer created:', customerId)
     }
 
-    // Create Razorpay subscription using amount instead of plan
+    // First create a plan
+    console.log('Creating Razorpay plan...')
+    const planResponse = await fetch('https://api.razorpay.com/v1/plans', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Basic ${btoa(`${razorpayKeyId}:${razorpayKeySecret}`)}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        period: 'monthly',
+        interval: 1,
+        item: {
+          name: 'Agent Crafter Pro',
+          amount: 59900, // ₹599 in paise
+          currency: 'INR',
+          description: 'Monthly subscription to Agent Crafter Pro'
+        }
+      }),
+    })
+
+    if (!planResponse.ok) {
+      const errorText = await planResponse.text()
+      console.error('Razorpay plan creation failed:', errorText)
+      throw new Error('Failed to create plan with Razorpay')
+    }
+
+    const planData = await planResponse.json()
+    console.log('Plan created:', planData.id)
+
+    // Create Razorpay subscription using the created plan
     const subscriptionResponse = await fetch('https://api.razorpay.com/v1/subscriptions', {
       method: 'POST',
       headers: {
@@ -93,15 +122,11 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        plan_id: planData.id,
         customer_id: customerId,
         total_count: 0, // Infinite subscription
         quantity: 1,
         start_at: Math.floor(Date.now() / 1000), // Start now
-        // Use amount directly instead of plan structure
-        amount: 59900, // ₹599 in paise (smallest currency unit)
-        currency: 'INR',
-        interval: 1,
-        period: 'monthly',
         notes: {
           plan_name: 'Agent Crafter Pro',
           user_email: user.email
