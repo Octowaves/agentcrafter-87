@@ -41,30 +41,51 @@ serve(async (req) => {
 
     console.log('Creating subscription for user:', user.id)
 
-    // Create Razorpay customer
-    const customerResponse = await fetch('https://api.razorpay.com/v1/customers', {
-      method: 'POST',
+    let customerId;
+
+    // First, try to get existing customer by email
+    const existingCustomerResponse = await fetch(`https://api.razorpay.com/v1/customers?email=${encodeURIComponent(user.email)}`, {
+      method: 'GET',
       headers: {
         'Authorization': `Basic ${btoa(`${razorpayKeyId}:${razorpayKeySecret}`)}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        name: user.user_metadata?.full_name || user.email,
-        email: user.email,
-      }),
     })
 
-    if (!customerResponse.ok) {
-      const errorText = await customerResponse.text()
-      console.error('Razorpay customer creation failed:', errorText)
-      throw new Error('Failed to create customer with Razorpay')
+    if (existingCustomerResponse.ok) {
+      const existingCustomers = await existingCustomerResponse.json()
+      if (existingCustomers.items && existingCustomers.items.length > 0) {
+        customerId = existingCustomers.items[0].id
+        console.log('Using existing customer:', customerId)
+      }
     }
 
-    const customer = await customerResponse.json()
-    console.log('Customer created:', customer.id)
+    // If no existing customer found, create a new one
+    if (!customerId) {
+      const customerResponse = await fetch('https://api.razorpay.com/v1/customers', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Basic ${btoa(`${razorpayKeyId}:${razorpayKeySecret}`)}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: user.user_metadata?.full_name || user.email,
+          email: user.email,
+        }),
+      })
 
-    // First, let's create a plan if it doesn't exist, or use an existing one
-    // For now, let's create a subscription directly with amount instead of plan_id
+      if (!customerResponse.ok) {
+        const errorText = await customerResponse.text()
+        console.error('Razorpay customer creation failed:', errorText)
+        throw new Error('Failed to create customer with Razorpay')
+      }
+
+      const customer = await customerResponse.json()
+      customerId = customer.id
+      console.log('New customer created:', customerId)
+    }
+
+    // Create Razorpay subscription
     const subscriptionResponse = await fetch('https://api.razorpay.com/v1/subscriptions', {
       method: 'POST',
       headers: {
@@ -72,7 +93,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        customer_id: customer.id,
+        customer_id: customerId,
         total_count: 0, // Infinite subscription
         quantity: 1,
         start_at: Math.floor(Date.now() / 1000), // Start now
@@ -81,7 +102,7 @@ serve(async (req) => {
           period: 'monthly',
           item: {
             name: 'Agent Crafter Pro',
-            amount: 59900, // $5.99 in paise (smallest currency unit)
+            amount: 59900, // ₹599 in paise (smallest currency unit)
             currency: 'INR'
           }
         }
@@ -103,11 +124,11 @@ serve(async (req) => {
       .insert({
         user_id: user.id,
         razorpay_subscription_id: subscription.id,
-        razorpay_customer_id: customer.id,
+        razorpay_customer_id: customerId,
         plan_id: plan,
         status: 'created',
-        amount: 599, // $5.99 in cents
-        currency: 'USD',
+        amount: 599, // ₹599 in rupees
+        currency: 'INR',
       })
 
     if (dbError) {
@@ -120,7 +141,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         subscription_id: subscription.id,
-        customer_id: customer.id,
+        customer_id: customerId,
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
