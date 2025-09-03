@@ -119,52 +119,95 @@ const ToolsGrid = ({ onSelectTool }: ToolsGridProps) => {
         })}
       </div>
 
-      {/* Partnership Section */}
-      <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-8 border border-emerald-100">
-        <div className="flex items-start gap-6">
-          <div className="flex-shrink-0">
-            <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center">
-              <Bot className="h-8 w-8 text-white" />
+      {/* Partnership Section - Bigger and More Prominent */}
+      <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-3xl p-12 border border-emerald-200 shadow-lg">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <Bot className="h-10 w-10 text-white" />
+            </div>
+            <div className="text-left">
+              <h2 className="text-4xl font-bold text-gray-900 mb-2">AI Agent & Automation Platform</h2>
+              <div className="flex items-center gap-3">
+                <span className="px-4 py-2 text-sm font-semibold text-emerald-800 bg-emerald-100 rounded-full">
+                  EXCLUSIVE PARTNERSHIP
+                </span>
+                <span className="text-emerald-600 font-semibold">Powered by ViaSocket</span>
+              </div>
             </div>
           </div>
           
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-3">
-              <h3 className="text-2xl font-bold text-gray-900">AI Agent & Automation</h3>
-              <span className="px-3 py-1 text-xs font-semibold text-emerald-800 bg-emerald-100 rounded-full">
-                EXCLUSIVE PARTNERSHIP
-              </span>
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-8">
+            Transform your AI agents into powerful automation workflows with our exclusive ViaSocket integration. 
+            Connect 1000+ platforms, build enterprise-grade automations, and deploy AI that actually works in your business.
+          </p>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 text-center border border-emerald-100">
+            <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <Zap className="h-6 w-6 text-white" />
             </div>
-            
-            <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-              Take your AI agents to the next level with our exclusive partnership with ViaSocket. 
-              Build powerful automations, connect multiple platforms, and deploy enterprise-grade AI workflows.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="flex items-center gap-3">
-                <Zap className="h-5 w-5 text-emerald-600" />
-                <span className="text-sm text-gray-700">1000+ Integrations</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Bot className="h-5 w-5 text-emerald-600" />
-                <span className="text-sm text-gray-700">Advanced AI Workflows</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Sparkles className="h-5 w-5 text-emerald-600" />
-                <span className="text-sm text-gray-700">Enterprise Ready</span>
-              </div>
-            </div>
-            
-            <Button 
-              onClick={() => window.open('https://viasocket.com/', '_blank')}
-              size="lg"
-              className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold px-6 py-3 rounded-lg"
-            >
-              Explore ViaSocket Integration
-              <ExternalLink className="ml-2 h-5 w-5" />
-            </Button>
+            <h4 className="font-bold text-gray-900 mb-2">1000+ Integrations</h4>
+            <p className="text-sm text-gray-600">Connect with all your favorite tools and platforms</p>
           </div>
+          
+          <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 text-center border border-emerald-100">
+            <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <Bot className="h-6 w-6 text-white" />
+            </div>
+            <h4 className="font-bold text-gray-900 mb-2">AI-Powered Workflows</h4>
+            <p className="text-sm text-gray-600">Build intelligent automations that learn and adapt</p>
+          </div>
+          
+          <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 text-center border border-emerald-100">
+            <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <Sparkles className="h-6 w-6 text-white" />
+            </div>
+            <h4 className="font-bold text-gray-900 mb-2">Enterprise Ready</h4>
+            <p className="text-sm text-gray-600">Scale securely with enterprise-grade infrastructure</p>
+          </div>
+          
+          <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 text-center border border-emerald-100">
+            <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <ArrowRight className="h-6 w-6 text-white" />
+            </div>
+            <h4 className="font-bold text-gray-900 mb-2">No-Code Setup</h4>
+            <p className="text-sm text-gray-600">Drag-and-drop interface for rapid deployment</p>
+          </div>
+        </div>
+
+        {/* Use Cases */}
+        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-8 mb-8 border border-emerald-100">
+          <h3 className="text-2xl font-bold text-gray-900 text-center mb-6">What You Can Build</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <h4 className="font-semibold text-gray-900 mb-2">Customer Support Automation</h4>
+              <p className="text-sm text-gray-600">AI agents that handle support tickets, route inquiries, and provide instant responses</p>
+            </div>
+            <div className="text-center">
+              <h4 className="font-semibold text-gray-900 mb-2">Sales & Marketing Workflows</h4>
+              <p className="text-sm text-gray-600">Automate lead scoring, email campaigns, and CRM updates with intelligent agents</p>
+            </div>
+            <div className="text-center">
+              <h4 className="font-semibold text-gray-900 mb-2">Data Processing Pipelines</h4>
+              <p className="text-sm text-gray-600">AI-powered data extraction, transformation, and analysis across multiple platforms</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center">
+          <Button 
+            onClick={() => window.open('https://viasocket.com/', '_blank')}
+            size="lg"
+            className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold px-12 py-4 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-200"
+          >
+            Explore ViaSocket Integration
+            <ExternalLink className="ml-3 h-6 w-6" />
+          </Button>
+          <p className="text-sm text-gray-600 mt-4">Start building powerful AI automations today</p>
         </div>
       </div>
 
