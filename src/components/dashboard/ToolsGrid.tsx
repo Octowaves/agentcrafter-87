@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Sparkles, Clock, ArrowRight } from 'lucide-react';
+import { Sparkles, Clock, ArrowRight, Bot, Zap, ExternalLink } from 'lucide-react';
 
 interface ToolsGridProps {
   onSelectTool: (toolId: string) => void;
@@ -117,6 +117,55 @@ const ToolsGrid = ({ onSelectTool }: ToolsGridProps) => {
             </Card>
           );
         })}
+      </div>
+
+      {/* Partnership Section */}
+      <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-8 border border-emerald-100">
+        <div className="flex items-start gap-6">
+          <div className="flex-shrink-0">
+            <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center">
+              <Bot className="h-8 w-8 text-white" />
+            </div>
+          </div>
+          
+          <div className="flex-1">
+            <div className="flex items-center gap-3 mb-3">
+              <h3 className="text-2xl font-bold text-gray-900">AI Agent & Automation</h3>
+              <span className="px-3 py-1 text-xs font-semibold text-emerald-800 bg-emerald-100 rounded-full">
+                EXCLUSIVE PARTNERSHIP
+              </span>
+            </div>
+            
+            <p className="text-gray-700 text-lg mb-6 leading-relaxed">
+              Take your AI agents to the next level with our exclusive partnership with ViaSocket. 
+              Build powerful automations, connect multiple platforms, and deploy enterprise-grade AI workflows.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="flex items-center gap-3">
+                <Zap className="h-5 w-5 text-emerald-600" />
+                <span className="text-sm text-gray-700">1000+ Integrations</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Bot className="h-5 w-5 text-emerald-600" />
+                <span className="text-sm text-gray-700">Advanced AI Workflows</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Sparkles className="h-5 w-5 text-emerald-600" />
+                <span className="text-sm text-gray-700">Enterprise Ready</span>
+              </div>
+            </div>
+            
+            <Button 
+              onClick={() => window.open('https://viasocket.com/', '_blank')}
+              size="lg"
+              className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold px-6 py-3 rounded-lg"
+            >
+              Explore ViaSocket Integration
+              <ExternalLink className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Call to Action */}
